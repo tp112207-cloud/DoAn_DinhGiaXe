@@ -1,5 +1,5 @@
 // ===== SHARED COMPONENTS =====
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = '/api';
 
 // Get current page name from URL
 function getCurrentPage() {
