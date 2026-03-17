@@ -1,8 +1,8 @@
 ---
 title: AutoVision AI
 emoji: 🚗
-colorFrom: azure
-colorTo: emerald
+colorFrom: blue
+colorTo: green
 sdk: docker
 pinned: false
 ---
