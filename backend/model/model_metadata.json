@@ -1,0 +1,100 @@
+{
+  "feature_cols": [
+    "fuel_encoded",
+    "seller_type_encoded",
+    "transmission_encoded",
+    "owner_encoded",
+    "brand_encoded",
+    "year",
+    "km_driven",
+    "mileage",
+    "engine",
+    "max_power_num",
+    "seats"
+  ],
+  "categorical_cols": [
+    "fuel",
+    "seller_type",
+    "transmission",
+    "owner",
+    "brand"
+  ],
+  "numerical_cols": [
+    "year",
+    "km_driven",
+    "mileage",
+    "engine",
+    "max_power_num",
+    "seats"
+  ],
+  "mae": 59382.539690239595,
+  "r2_score": 0.9854125540698515,
+  "n_samples": 7906,
+  "brands": [
+    "Ambassador",
+    "Ashok",
+    "Audi",
+    "BMW",
+    "Chevrolet",
+    "Daewoo",
+    "Datsun",
+    "Fiat",
+    "Force",
+    "Ford",
+    "Honda",
+    "Hyundai",
+    "Isuzu",
+    "Jaguar",
+    "Jeep",
+    "Kia",
+    "Land Rover",
+    "Lexus",
+    "MG",
+    "Mahindra",
+    "Maruti",
+    "Mercedes-Benz",
+    "Mitsubishi",
+    "Nissan",
+    "Opel",
+    "Renault",
+    "Skoda",
+    "Tata",
+    "Toyota",
+    "Volkswagen",
+    "Volvo"
+  ],
+  "fuel_types": [
+    "CNG",
+    "Diesel",
+    "LPG",
+    "Petrol"
+  ],
+  "transmission_types": [
+    "Automatic",
+    "Manual"
+  ],
+  "owner_types": [
+    "First Owner",
+    "Fourth & Above Owner",
+    "Second Owner",
+    "Test Drive Car",
+    "Third Owner"
+  ],
+  "year_range": [
+    1994,
+    2020
+  ],
+  "feature_importance": {
+    "fuel": 0.004072029279120987,
+    "seller_type": 0.004158508309047743,
+    "transmission": 0.002841032387610726,
+    "owner": 0.0010697745831855488,
+    "brand": 0.01540798575664843,
+    "year": 0.2029785854942592,
+    "km_driven": 0.02102454354450486,
+    "mileage": 0.014362308161569705,
+    "engine": 0.017998659238510444,
+    "max_power_num": 0.7066483549539907,
+    "seats": 0.009438218291551607
+  }
+}

@@ -1,0 +1,305 @@
+hang_xe,dong_xe,nam_san_xuat,so_km,nhien_lieu,hop_so,xuat_xu,gia
+Toyota,Vios,2023,5000,Xăng,Tự động,Lắp ráp trong nước,550
+Toyota,Vios,2022,15000,Xăng,Tự động,Lắp ráp trong nước,510
+Toyota,Vios,2021,30000,Xăng,Tự động,Lắp ráp trong nước,470
+Toyota,Vios,2020,45000,Xăng,Số sàn,Lắp ráp trong nước,410
+Toyota,Vios,2019,60000,Xăng,Số sàn,Lắp ráp trong nước,370
+Toyota,Vios,2018,75000,Xăng,Số sàn,Lắp ráp trong nước,330
+Toyota,Vios,2017,90000,Xăng,Số sàn,Lắp ráp trong nước,290
+Toyota,Vios,2016,100000,Xăng,Số sàn,Lắp ráp trong nước,260
+Toyota,Camry,2023,8000,Xăng,Tự động,Nhập khẩu,1250
+Toyota,Camry,2022,20000,Xăng,Tự động,Nhập khẩu,1150
+Toyota,Camry,2021,35000,Xăng,Tự động,Nhập khẩu,1050
+Toyota,Camry,2020,50000,Xăng,Tự động,Nhập khẩu,950
+Toyota,Camry,2019,65000,Xăng,Tự động,Nhập khẩu,850
+Toyota,Camry,2018,80000,Xăng,Tự động,Nhập khẩu,750
+Toyota,Corolla Cross,2023,10000,Xăng,Tự động,Lắp ráp trong nước,870
+Toyota,Corolla Cross,2022,25000,Xăng,Tự động,Lắp ráp trong nước,800
+Toyota,Corolla Cross,2021,40000,Xăng,Tự động,Lắp ráp trong nước,740
+Toyota,Corolla Cross,2023,5000,Hybrid,Tự động,Lắp ráp trong nước,950
+Toyota,Corolla Cross,2022,18000,Hybrid,Tự động,Lắp ráp trong nước,880
+Toyota,Fortuner,2023,12000,Dầu,Tự động,Lắp ráp trong nước,1150
+Toyota,Fortuner,2022,28000,Dầu,Tự động,Lắp ráp trong nước,1050
+Toyota,Fortuner,2021,45000,Dầu,Tự động,Lắp ráp trong nước,950
+Toyota,Fortuner,2020,60000,Dầu,Tự động,Lắp ráp trong nước,850
+Toyota,Fortuner,2019,75000,Dầu,Số sàn,Lắp ráp trong nước,750
+Toyota,Fortuner,2018,90000,Dầu,Số sàn,Lắp ráp trong nước,670
+Toyota,Land Cruiser,2023,8000,Dầu,Tự động,Nhập khẩu,4200
+Toyota,Land Cruiser,2022,20000,Dầu,Tự động,Nhập khẩu,3900
+Toyota,Land Cruiser,2021,35000,Dầu,Tự động,Nhập khẩu,3500
+Toyota,Land Cruiser,2020,50000,Dầu,Tự động,Nhập khẩu,3100
+Honda,City,2023,6000,Xăng,Tự động,Lắp ráp trong nước,570
+Honda,City,2022,18000,Xăng,Tự động,Lắp ráp trong nước,520
+Honda,City,2021,32000,Xăng,Tự động,Lắp ráp trong nước,475
+Honda,City,2020,48000,Xăng,Tự động,Lắp ráp trong nước,430
+Honda,City,2019,62000,Xăng,Số sàn,Lắp ráp trong nước,380
+Honda,City,2018,78000,Xăng,Số sàn,Lắp ráp trong nước,340
+Honda,City,2017,92000,Xăng,Số sàn,Lắp ráp trong nước,300
+Honda,Civic,2023,7000,Xăng,Tự động,Nhập khẩu,870
+Honda,Civic,2022,20000,Xăng,Tự động,Nhập khẩu,800
+Honda,Civic,2021,35000,Xăng,Tự động,Nhập khẩu,730
+Honda,Civic,2020,50000,Xăng,Tự động,Nhập khẩu,660
+Honda,Civic,2019,65000,Xăng,Tự động,Nhập khẩu,590
+Honda,Civic,2018,80000,Xăng,Tự động,Nhập khẩu,520
+Honda,CR-V,2023,9000,Xăng,Tự động,Nhập khẩu,1050
+Honda,CR-V,2022,22000,Xăng,Tự động,Nhập khẩu,960
+Honda,CR-V,2021,38000,Xăng,Tự động,Nhập khẩu,880
+Honda,CR-V,2020,55000,Xăng,Tự động,Nhập khẩu,800
+Honda,CR-V,2019,70000,Xăng,Tự động,Nhập khẩu,720
+Honda,CR-V,2018,85000,Dầu,Tự động,Nhập khẩu,650
+Honda,HR-V,2023,6000,Xăng,Tự động,Nhập khẩu,850
+Honda,HR-V,2022,20000,Xăng,Tự động,Nhập khẩu,780
+Honda,HR-V,2023,4000,Hybrid,Tự động,Nhập khẩu,920
+Hyundai,Accent,2023,5000,Xăng,Tự động,Lắp ráp trong nước,540
+Hyundai,Accent,2022,16000,Xăng,Tự động,Lắp ráp trong nước,490
+Hyundai,Accent,2021,30000,Xăng,Tự động,Lắp ráp trong nước,440
+Hyundai,Accent,2020,45000,Xăng,Số sàn,Lắp ráp trong nước,390
+Hyundai,Accent,2019,60000,Xăng,Số sàn,Lắp ráp trong nước,340
+Hyundai,Accent,2018,75000,Xăng,Số sàn,Lắp ráp trong nước,300
+Hyundai,Accent,2017,88000,Xăng,Số sàn,Lắp ráp trong nước,265
+Hyundai,Tucson,2023,8000,Xăng,Tự động,Lắp ráp trong nước,920
+Hyundai,Tucson,2022,22000,Xăng,Tự động,Lắp ráp trong nước,840
+Hyundai,Tucson,2021,38000,Xăng,Tự động,Lắp ráp trong nước,770
+Hyundai,Tucson,2020,52000,Xăng,Tự động,Lắp ráp trong nước,700
+Hyundai,Tucson,2019,68000,Dầu,Tự động,Lắp ráp trong nước,630
+Hyundai,Tucson,2018,82000,Dầu,Tự động,Lắp ráp trong nước,565
+Hyundai,Santa Fe,2023,10000,Dầu,Tự động,Lắp ráp trong nước,1250
+Hyundai,Santa Fe,2022,25000,Dầu,Tự động,Lắp ráp trong nước,1140
+Hyundai,Santa Fe,2021,40000,Dầu,Tự động,Lắp ráp trong nước,1030
+Hyundai,Santa Fe,2020,55000,Dầu,Tự động,Lắp ráp trong nước,930
+Hyundai,Santa Fe,2019,70000,Dầu,Tự động,Lắp ráp trong nước,830
+Hyundai,Creta,2023,5000,Xăng,Tự động,Lắp ráp trong nước,660
+Hyundai,Creta,2022,18000,Xăng,Tự động,Lắp ráp trong nước,600
+Hyundai,Stargazer,2023,4000,Xăng,Tự động,Lắp ráp trong nước,580
+Hyundai,Stargazer,2024,2000,Xăng,Tự động,Lắp ráp trong nước,620
+KIA,Morning,2023,4000,Xăng,Tự động,Lắp ráp trong nước,400
+KIA,Morning,2022,15000,Xăng,Tự động,Lắp ráp trong nước,365
+KIA,Morning,2021,28000,Xăng,Số sàn,Lắp ráp trong nước,320
+KIA,Morning,2020,42000,Xăng,Số sàn,Lắp ráp trong nước,280
+KIA,Morning,2019,56000,Xăng,Số sàn,Lắp ráp trong nước,250
+KIA,Morning,2018,70000,Xăng,Số sàn,Lắp ráp trong nước,220
+KIA,Seltos,2023,7000,Xăng,Tự động,Lắp ráp trong nước,710
+KIA,Seltos,2022,20000,Xăng,Tự động,Lắp ráp trong nước,650
+KIA,Seltos,2021,35000,Xăng,Tự động,Lắp ráp trong nước,590
+KIA,Seltos,2020,50000,Xăng,Tự động,Lắp ráp trong nước,530
+KIA,Seltos,2023,5000,Dầu,Tự động,Lắp ráp trong nước,750
+KIA,K3,2023,6000,Xăng,Tự động,Lắp ráp trong nước,640
+KIA,K3,2022,18000,Xăng,Tự động,Lắp ráp trong nước,590
+KIA,K3,2021,32000,Xăng,Tự động,Lắp ráp trong nước,530
+KIA,K3,2020,48000,Xăng,Tự động,Lắp ráp trong nước,470
+KIA,Sorento,2023,9000,Dầu,Tự động,Nhập khẩu,1150
+KIA,Sorento,2022,23000,Dầu,Tự động,Nhập khẩu,1050
+KIA,Sorento,2021,40000,Dầu,Tự động,Lắp ráp trong nước,940
+KIA,Sorento,2020,55000,Dầu,Tự động,Lắp ráp trong nước,840
+KIA,Carnival,2023,8000,Dầu,Tự động,Nhập khẩu,1350
+KIA,Carnival,2022,22000,Dầu,Tự động,Nhập khẩu,1230
+Mazda,Mazda3,2023,6000,Xăng,Tự động,Lắp ráp trong nước,720
+Mazda,Mazda3,2022,19000,Xăng,Tự động,Lắp ráp trong nước,660
+Mazda,Mazda3,2021,34000,Xăng,Tự động,Lắp ráp trong nước,600
+Mazda,Mazda3,2020,50000,Xăng,Tự động,Lắp ráp trong nước,540
+Mazda,Mazda3,2019,65000,Xăng,Tự động,Lắp ráp trong nước,480
+Mazda,Mazda3,2018,80000,Xăng,Tự động,Lắp ráp trong nước,430
+Mazda,CX-5,2023,8000,Xăng,Tự động,Lắp ráp trong nước,930
+Mazda,CX-5,2022,22000,Xăng,Tự động,Lắp ráp trong nước,860
+Mazda,CX-5,2021,37000,Xăng,Tự động,Lắp ráp trong nước,790
+Mazda,CX-5,2020,52000,Xăng,Tự động,Lắp ráp trong nước,720
+Mazda,CX-5,2019,67000,Xăng,Tự động,Lắp ráp trong nước,650
+Mazda,CX-5,2018,82000,Xăng,Tự động,Lắp ráp trong nước,580
+Mazda,CX-8,2023,7000,Dầu,Tự động,Lắp ráp trong nước,1080
+Mazda,CX-8,2022,20000,Dầu,Tự động,Lắp ráp trong nước,990
+Mazda,CX-8,2021,35000,Dầu,Tự động,Lắp ráp trong nước,900
+Mazda,CX-8,2020,50000,Xăng,Tự động,Lắp ráp trong nước,810
+Mazda,CX-3,2023,5000,Xăng,Tự động,Nhập khẩu,690
+Mazda,CX-3,2022,18000,Xăng,Tự động,Nhập khẩu,630
+Mazda,CX-30,2023,6000,Xăng,Tự động,Nhập khẩu,810
+Mazda,CX-30,2022,19000,Xăng,Tự động,Nhập khẩu,740
+VinFast,Fadil,2023,4000,Xăng,Tự động,Lắp ráp trong nước,380
+VinFast,Fadil,2022,16000,Xăng,Tự động,Lắp ráp trong nước,340
+VinFast,Fadil,2021,30000,Xăng,Tự động,Lắp ráp trong nước,300
+VinFast,Fadil,2020,44000,Xăng,Tự động,Lắp ráp trong nước,260
+VinFast,VF e34,2023,5000,Điện,Tự động,Lắp ráp trong nước,690
+VinFast,VF e34,2022,18000,Điện,Tự động,Lắp ráp trong nước,580
+VinFast,VF 8,2023,8000,Điện,Tự động,Lắp ráp trong nước,1150
+VinFast,VF 8,2024,3000,Điện,Tự động,Lắp ráp trong nước,1280
+VinFast,VF 9,2023,10000,Điện,Tự động,Lắp ráp trong nước,1680
+VinFast,VF 9,2024,4000,Điện,Tự động,Lắp ráp trong nước,1800
+VinFast,VF 5,2024,2000,Điện,Tự động,Lắp ráp trong nước,480
+VinFast,VF 6,2024,3000,Điện,Tự động,Lắp ráp trong nước,680
+VinFast,VF 7,2024,2500,Điện,Tự động,Lắp ráp trong nước,850
+VinFast,Lux A2.0,2021,30000,Xăng,Tự động,Lắp ráp trong nước,750
+VinFast,Lux A2.0,2020,45000,Xăng,Tự động,Lắp ráp trong nước,650
+VinFast,Lux A2.0,2019,60000,Xăng,Tự động,Lắp ráp trong nước,550
+VinFast,Lux SA2.0,2021,28000,Xăng,Tự động,Lắp ráp trong nước,950
+VinFast,Lux SA2.0,2020,42000,Xăng,Tự động,Lắp ráp trong nước,830
+VinFast,Lux SA2.0,2019,58000,Xăng,Tự động,Lắp ráp trong nước,720
+Ford,Ranger,2023,10000,Dầu,Tự động,Nhập khẩu,920
+Ford,Ranger,2022,25000,Dầu,Tự động,Nhập khẩu,840
+Ford,Ranger,2021,40000,Dầu,Tự động,Nhập khẩu,760
+Ford,Ranger,2020,55000,Dầu,Số sàn,Nhập khẩu,680
+Ford,Ranger,2019,70000,Dầu,Số sàn,Nhập khẩu,600
+Ford,Ranger,2018,85000,Dầu,Số sàn,Nhập khẩu,530
+Ford,Everest,2023,9000,Dầu,Tự động,Nhập khẩu,1350
+Ford,Everest,2022,24000,Dầu,Tự động,Nhập khẩu,1220
+Ford,Everest,2021,40000,Dầu,Tự động,Nhập khẩu,1100
+Ford,Everest,2020,56000,Dầu,Tự động,Nhập khẩu,980
+Ford,Everest,2019,72000,Dầu,Tự động,Nhập khẩu,870
+Ford,EcoSport,2022,15000,Xăng,Tự động,Lắp ráp trong nước,560
+Ford,EcoSport,2021,28000,Xăng,Tự động,Lắp ráp trong nước,500
+Ford,EcoSport,2020,42000,Xăng,Tự động,Lắp ráp trong nước,440
+Ford,Territory,2023,6000,Xăng,Tự động,Nhập khẩu,820
+Ford,Territory,2022,20000,Xăng,Tự động,Nhập khẩu,740
+Mercedes,C-Class,2023,8000,Xăng,Tự động,Nhập khẩu,1850
+Mercedes,C-Class,2022,20000,Xăng,Tự động,Nhập khẩu,1680
+Mercedes,C-Class,2021,35000,Xăng,Tự động,Nhập khẩu,1520
+Mercedes,C-Class,2020,50000,Xăng,Tự động,Nhập khẩu,1350
+Mercedes,C-Class,2019,65000,Xăng,Tự động,Nhập khẩu,1200
+Mercedes,C-Class,2018,80000,Xăng,Tự động,Nhập khẩu,1050
+Mercedes,E-Class,2023,7000,Xăng,Tự động,Nhập khẩu,2700
+Mercedes,E-Class,2022,18000,Xăng,Tự động,Nhập khẩu,2450
+Mercedes,E-Class,2021,32000,Xăng,Tự động,Nhập khẩu,2200
+Mercedes,E-Class,2020,48000,Xăng,Tự động,Nhập khẩu,1950
+Mercedes,E-Class,2019,63000,Xăng,Tự động,Nhập khẩu,1720
+Mercedes,GLC,2023,9000,Xăng,Tự động,Nhập khẩu,2100
+Mercedes,GLC,2022,22000,Xăng,Tự động,Nhập khẩu,1900
+Mercedes,GLC,2021,38000,Xăng,Tự động,Nhập khẩu,1700
+Mercedes,GLC,2020,54000,Xăng,Tự động,Nhập khẩu,1500
+Mercedes,GLC,2019,70000,Dầu,Tự động,Nhập khẩu,1320
+BMW,Series 3,2023,7000,Xăng,Tự động,Nhập khẩu,1750
+BMW,Series 3,2022,19000,Xăng,Tự động,Nhập khẩu,1580
+BMW,Series 3,2021,33000,Xăng,Tự động,Nhập khẩu,1420
+BMW,Series 3,2020,48000,Xăng,Tự động,Nhập khẩu,1270
+BMW,Series 3,2019,63000,Xăng,Tự động,Nhập khẩu,1120
+BMW,Series 5,2023,6000,Xăng,Tự động,Nhập khẩu,2650
+BMW,Series 5,2022,18000,Xăng,Tự động,Nhập khẩu,2380
+BMW,Series 5,2021,32000,Xăng,Tự động,Nhập khẩu,2120
+BMW,Series 5,2020,47000,Xăng,Tự động,Nhập khẩu,1880
+BMW,X3,2023,8000,Xăng,Tự động,Nhập khẩu,2100
+BMW,X3,2022,21000,Xăng,Tự động,Nhập khẩu,1900
+BMW,X3,2021,36000,Xăng,Tự động,Nhập khẩu,1700
+BMW,X3,2020,52000,Dầu,Tự động,Nhập khẩu,1500
+BMW,X5,2023,7000,Xăng,Tự động,Nhập khẩu,3600
+BMW,X5,2022,19000,Xăng,Tự động,Nhập khẩu,3250
+BMW,X5,2021,34000,Dầu,Tự động,Nhập khẩu,2900
+BMW,X5,2020,50000,Dầu,Tự động,Nhập khẩu,2580
+Mitsubishi,Xpander,2023,6000,Xăng,Tự động,Lắp ráp trong nước,630
+Mitsubishi,Xpander,2022,18000,Xăng,Tự động,Lắp ráp trong nước,570
+Mitsubishi,Xpander,2021,32000,Xăng,Tự động,Lắp ráp trong nước,510
+Mitsubishi,Xpander,2020,46000,Xăng,Tự động,Lắp ráp trong nước,460
+Mitsubishi,Xpander,2019,60000,Xăng,Số sàn,Nhập khẩu,410
+Mitsubishi,Outlander,2023,7000,Xăng,Tự động,Lắp ráp trong nước,950
+Mitsubishi,Outlander,2022,20000,Xăng,Tự động,Lắp ráp trong nước,870
+Mitsubishi,Outlander,2021,35000,Xăng,Tự động,Lắp ráp trong nước,790
+Mitsubishi,Outlander,2020,50000,Xăng,Tự động,Lắp ráp trong nước,710
+Mitsubishi,Pajero Sport,2023,9000,Dầu,Tự động,Nhập khẩu,1150
+Mitsubishi,Pajero Sport,2022,23000,Dầu,Tự động,Nhập khẩu,1050
+Mitsubishi,Pajero Sport,2021,38000,Dầu,Tự động,Nhập khẩu,950
+Mitsubishi,Attrage,2023,4000,Xăng,Tự động,Nhập khẩu,430
+Mitsubishi,Attrage,2022,16000,Xăng,Tự động,Nhập khẩu,390
+Mitsubishi,Attrage,2021,28000,Xăng,Số sàn,Nhập khẩu,340
+Nissan,Almera,2023,5000,Xăng,Tự động,Lắp ráp trong nước,510
+Nissan,Almera,2022,17000,Xăng,Tự động,Lắp ráp trong nước,460
+Nissan,Almera,2021,30000,Xăng,Tự động,Lắp ráp trong nước,410
+Nissan,X-Trail,2023,8000,Xăng,Tự động,Nhập khẩu,950
+Nissan,X-Trail,2022,22000,Xăng,Tự động,Nhập khẩu,860
+Nissan,X-Trail,2021,38000,Xăng,Tự động,Nhập khẩu,780
+Nissan,Navara,2023,10000,Dầu,Tự động,Nhập khẩu,780
+Nissan,Navara,2022,24000,Dầu,Tự động,Nhập khẩu,710
+Nissan,Navara,2021,40000,Dầu,Số sàn,Nhập khẩu,640
+Nissan,Navara,2020,55000,Dầu,Số sàn,Nhập khẩu,570
+Peugeot,3008,2023,7000,Xăng,Tự động,Lắp ráp trong nước,1150
+Peugeot,3008,2022,20000,Xăng,Tự động,Lắp ráp trong nước,1030
+Peugeot,3008,2021,35000,Xăng,Tự động,Lắp ráp trong nước,910
+Peugeot,3008,2020,50000,Xăng,Tự động,Nhập khẩu,790
+Peugeot,5008,2023,8000,Xăng,Tự động,Lắp ráp trong nước,1320
+Peugeot,5008,2022,22000,Xăng,Tự động,Lắp ráp trong nước,1180
+Peugeot,5008,2021,37000,Xăng,Tự động,Lắp ráp trong nước,1050
+Peugeot,2008,2023,5000,Xăng,Tự động,Nhập khẩu,820
+Peugeot,2008,2022,17000,Xăng,Tự động,Nhập khẩu,740
+Suzuki,XL7,2023,5000,Xăng,Tự động,Nhập khẩu,600
+Suzuki,XL7,2022,18000,Xăng,Tự động,Nhập khẩu,540
+Suzuki,XL7,2021,30000,Xăng,Tự động,Nhập khẩu,480
+Suzuki,Ertiga,2023,4000,Xăng,Tự động,Nhập khẩu,530
+Suzuki,Ertiga,2022,16000,Xăng,Tự động,Nhập khẩu,480
+Suzuki,Ertiga,2021,28000,Xăng,Tự động,Nhập khẩu,430
+Suzuki,Ertiga,2020,42000,Xăng,Số sàn,Nhập khẩu,380
+Suzuki,Swift,2023,3000,Xăng,Tự động,Nhập khẩu,550
+Suzuki,Swift,2022,15000,Xăng,Tự động,Nhập khẩu,500
+Suzuki,Ciaz,2021,25000,Xăng,Tự động,Nhập khẩu,440
+Suzuki,Ciaz,2020,38000,Xăng,Tự động,Nhập khẩu,390
+Toyota,Raize,2023,5000,Xăng,Tự động,Lắp ráp trong nước,530
+Toyota,Raize,2022,18000,Xăng,Tự động,Lắp ráp trong nước,480
+Toyota,Veloz Cross,2023,6000,Xăng,Tự động,Lắp ráp trong nước,670
+Toyota,Veloz Cross,2022,19000,Xăng,Tự động,Lắp ráp trong nước,610
+Toyota,Avanza Premio,2023,5000,Xăng,Tự động,Lắp ráp trong nước,580
+Toyota,Avanza Premio,2022,17000,Xăng,Tự động,Lắp ráp trong nước,530
+Hyundai,i10,2023,4000,Xăng,Tự động,Lắp ráp trong nước,420
+Hyundai,i10,2022,15000,Xăng,Tự động,Lắp ráp trong nước,380
+Hyundai,i10,2021,28000,Xăng,Số sàn,Lắp ráp trong nước,330
+Hyundai,i10,2020,40000,Xăng,Số sàn,Lắp ráp trong nước,290
+Hyundai,i10,2019,54000,Xăng,Số sàn,Lắp ráp trong nước,255
+Hyundai,Elantra,2023,6000,Xăng,Tự động,Lắp ráp trong nước,730
+Hyundai,Elantra,2022,18000,Xăng,Tự động,Lắp ráp trong nước,660
+Hyundai,Elantra,2021,32000,Xăng,Tự động,Lắp ráp trong nước,600
+Hyundai,Elantra,2020,48000,Xăng,Tự động,Lắp ráp trong nước,540
+Hyundai,Custin,2024,3000,Xăng,Tự động,Lắp ráp trong nước,850
+Hyundai,Custin,2023,12000,Xăng,Tự động,Lắp ráp trong nước,780
+Toyota,Innova Cross,2024,4000,Hybrid,Tự động,Lắp ráp trong nước,990
+Toyota,Innova Cross,2023,15000,Hybrid,Tự động,Lắp ráp trong nước,920
+Toyota,Yaris Cross,2024,3000,Hybrid,Tự động,Nhập khẩu,830
+Toyota,Yaris Cross,2023,12000,Xăng,Tự động,Nhập khẩu,740
+Honda,Accord,2023,8000,Xăng,Tự động,Nhập khẩu,1350
+Honda,Accord,2022,20000,Xăng,Tự động,Nhập khẩu,1220
+Honda,Accord,2021,34000,Xăng,Tự động,Nhập khẩu,1100
+Honda,Accord,2020,50000,Xăng,Tự động,Nhập khẩu,980
+Honda,BR-V,2023,5000,Xăng,Tự động,Lắp ráp trong nước,650
+Honda,BR-V,2022,18000,Xăng,Tự động,Lắp ráp trong nước,590
+Mercedes,S-Class,2023,6000,Xăng,Tự động,Nhập khẩu,5200
+Mercedes,S-Class,2022,16000,Xăng,Tự động,Nhập khẩu,4700
+Mercedes,S-Class,2021,28000,Xăng,Tự động,Nhập khẩu,4200
+Mercedes,GLE,2023,8000,Dầu,Tự động,Nhập khẩu,4100
+Mercedes,GLE,2022,20000,Dầu,Tự động,Nhập khẩu,3700
+Mercedes,GLE,2021,35000,Dầu,Tự động,Nhập khẩu,3300
+BMW,X1,2023,6000,Xăng,Tự động,Nhập khẩu,1750
+BMW,X1,2022,18000,Xăng,Tự động,Nhập khẩu,1580
+BMW,X1,2021,32000,Xăng,Tự động,Nhập khẩu,1400
+Audi,A4,2023,7000,Xăng,Tự động,Nhập khẩu,1900
+Audi,A4,2022,19000,Xăng,Tự động,Nhập khẩu,1720
+Audi,A4,2021,33000,Xăng,Tự động,Nhập khẩu,1540
+Audi,Q5,2023,8000,Xăng,Tự động,Nhập khẩu,2500
+Audi,Q5,2022,21000,Xăng,Tự động,Nhập khẩu,2260
+Audi,Q5,2021,36000,Xăng,Tự động,Nhập khẩu,2030
+Audi,Q7,2023,7000,Dầu,Tự động,Nhập khẩu,3800
+Audi,Q7,2022,19000,Dầu,Tự động,Nhập khẩu,3450
+Audi,Q7,2021,34000,Dầu,Tự động,Nhập khẩu,3100
+Lexus,RX,2023,6000,Xăng,Tự động,Nhập khẩu,3500
+Lexus,RX,2022,18000,Xăng,Tự động,Nhập khẩu,3150
+Lexus,RX,2021,32000,Xăng,Tự động,Nhập khẩu,2800
+Lexus,NX,2023,5000,Xăng,Tự động,Nhập khẩu,2650
+Lexus,NX,2022,17000,Xăng,Tự động,Nhập khẩu,2400
+Lexus,ES,2023,7000,Xăng,Tự động,Nhập khẩu,2900
+Lexus,ES,2022,18000,Xăng,Tự động,Nhập khẩu,2620
+Volvo,XC60,2023,6000,Xăng,Tự động,Nhập khẩu,2300
+Volvo,XC60,2022,19000,Xăng,Tự động,Nhập khẩu,2080
+Volvo,XC60,2021,33000,Dầu,Tự động,Nhập khẩu,1860
+Volvo,XC90,2023,7000,Xăng,Tự động,Nhập khẩu,3700
+Volvo,XC90,2022,18000,Xăng,Tự động,Nhập khẩu,3350
+MG,5,2023,4000,Xăng,Tự động,Nhập khẩu,520
+MG,5,2022,16000,Xăng,Tự động,Nhập khẩu,460
+MG,ZS,2023,5000,Xăng,Tự động,Nhập khẩu,580
+MG,ZS,2022,18000,Xăng,Tự động,Nhập khẩu,520
+MG,HS,2023,6000,Xăng,Tự động,Nhập khẩu,750
+MG,HS,2022,19000,Xăng,Tự động,Nhập khẩu,680
+Isuzu,D-Max,2023,10000,Dầu,Tự động,Nhập khẩu,680
+Isuzu,D-Max,2022,24000,Dầu,Tự động,Nhập khẩu,620
+Isuzu,D-Max,2021,38000,Dầu,Số sàn,Nhập khẩu,550
+Isuzu,mu-X,2023,8000,Dầu,Tự động,Nhập khẩu,880
+Isuzu,mu-X,2022,22000,Dầu,Tự động,Nhập khẩu,800
+Isuzu,mu-X,2021,36000,Dầu,Tự động,Nhập khẩu,720
+Toyota,Hilux,2023,10000,Dầu,Tự động,Nhập khẩu,850
+Toyota,Hilux,2022,25000,Dầu,Tự động,Nhập khẩu,780
+Toyota,Hilux,2021,40000,Dầu,Số sàn,Nhập khẩu,690
+Toyota,Hilux,2020,55000,Dầu,Số sàn,Nhập khẩu,610
+Chevrolet,Trailblazer,2019,65000,Dầu,Tự động,Nhập khẩu,620
+Chevrolet,Trailblazer,2018,80000,Dầu,Tự động,Nhập khẩu,540
+Chevrolet,Colorado,2019,60000,Dầu,Tự động,Nhập khẩu,560
+Chevrolet,Colorado,2018,75000,Dầu,Số sàn,Nhập khẩu,480

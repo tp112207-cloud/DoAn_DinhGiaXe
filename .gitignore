@@ -1,0 +1,14 @@
+# Environments
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+.env.local
+.env.development
+.env.test
+.env.production

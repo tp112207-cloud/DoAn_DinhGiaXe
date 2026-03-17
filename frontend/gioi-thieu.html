@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Giới thiệu về dự án AutoVision.AI - AI dự đoán giá xe ô tô Việt Nam">
+    <title>Giới thiệu - AutoVision.AI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+    <style>
+        .about-hero {
+            text-align: center;
+            padding: 80px 0 60px;
+            position: relative;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(14, 165, 233, 0.08), transparent 70%);
+            pointer-events: none;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .about-hero p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .milestone {
+            display: flex;
+            gap: 20px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .milestone:last-child {
+            border: none;
+        }
+
+        .milestone-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .milestone h4 {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .milestone p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 28px 16px;
+        }
+
+        .tech-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .tech-item h4 {
+            font-weight: 700;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+        }
+
+        .tech-item p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .faq-item {
+            margin-bottom: 12px;
+        }
+
+        .faq-q {
+            width: 100%;
+            text-align: left;
+            padding: 18px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-q:hover {
+            border-color: var(--border-hover);
+        }
+
+        .faq-q .arrow {
+            transition: var(--transition);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .faq-q.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-a-inner {
+            padding: 16px 24px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .faq-q.open+.faq-a {
+            max-height: 300px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .team-card {
+            text-align: center;
+            padding: 32px 20px;
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-full);
+            background: var(--accent-gradient);
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .team-name {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .team-role {
+            color: var(--accent-secondary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <!-- About Hero -->
+        <section class="about-hero">
+            <div class="container">
+                <div class="hero-badge" style="margin-bottom:20px;">
+                    <span>📚</span> Đồ án AI - Machine Learning
+                </div>
+                <h1>Về <span
+                        style="background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AutoVision.AI</span>
+                </h1>
+                <p>Dự án nghiên cứu và phát triển ứng dụng trí tuệ nhân tạo vào việc dự đoán giá xe ô tô tại thị trường
+                    Việt Nam, giúp người dùng đưa ra quyết định mua bán thông minh hơn.</p>
+            </div>
+        </section>
+
+        <!-- Methodology -->
+        <section class="section reveal" style="padding-top:0;">
+            <div class="container" style="max-width:800px;">
+                <h2 class="section-title" style="text-align:center;">Phương pháp AI</h2>
+                <p class="section-subtitle" style="text-align:center; margin:0 auto 40px;">Quy trình xây dựng mô hình dự
+                    đoán</p>
+
+                <div class="card glass-panel" style="padding:32px">
+                    <div class="milestone">
+                        <div class="milestone-icon">📊</div>
+                        <div>
+                            <h4>1. Thu thập dữ liệu</h4>
+                            <p>Thu thập hơn 300 bản ghi dữ liệu xe ô tô từ thị trường Việt Nam, bao gồm 19 hãng xe và 87
+                                dòng xe khác nhau với đầy đủ thông tin về giá bán, năm sản xuất, số km, nhiên liệu, v.v.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-icon">🔧</div>
+                        <div>
+                            <h4>2. Tiền xử lý dữ liệu</h4>
+                            <p>Mã hoá các đặc trưng phân loại (Label Encoding), chuẩn hoá dữ liệu số, xử lý giá trị
+                                thiếu và loại bỏ outliers để đảm bảo chất lượng training data.</p>
+                        </div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-icon">🧠</div>
+                        <div>
+                            <h4>3. Huấn luyện mô hình</h4>
+                            <p>Sử dụng thuật toán <strong>Gradient Boosting Regressor</strong> với 200 estimators,
+                                max_depth=5, learning_rate=0.1. Chia dữ liệu 80/20 cho training/testing.</p>
+                        </div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-icon">📈</div>
+                        <div>
+                            <h4>4. Đánh giá hiệu suất</h4>
+                            <p>Mô hình đạt <strong>R² Score = 87.4%</strong>, cho thấy khả năng giải thích tốt sự biến
+                                thiên của giá xe. Feature Importance cho thấy hãng xe và dòng xe là yếu tố ảnh hưởng lớn
+                                nhất.</p>
+                        </div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-icon">🚀</div>
+                        <div>
+                            <h4>5. Triển khai API</h4>
+                            <p>Xây dựng REST API bằng Flask để phục vụ dự đoán real-time. Frontend giao tiếp qua HTTP
+                                requests, nhận kết quả dự đoán kèm khoảng tin cậy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="section reveal" id="tech" style="background:var(--bg-secondary);">
+            <div class="container">
+                <h2 class="section-title" style="text-align:center;">Công nghệ sử dụng</h2>
+                <p class="section-subtitle" style="text-align:center; margin:0 auto 40px;">Stack công nghệ hiện đại cho
+                    hiệu suất tối ưu</p>
+
+                <div class="tech-grid stagger">
+                    <div class="card tech-item glass-panel premium-hover">
+                        <div class="icon">🐍</div>
+                        <h4>Python</h4>
+                        <p>Backend & ML</p>
+                    </div>
+                    <div class="card tech-item glass-panel premium-hover">
+                        <div class="icon">🌶️</div>
+                        <h4>Flask</h4>
+                        <p>REST API Server</p>
+                    </div>
+                    <div class="card tech-item glass-panel premium-hover">
+                        <div class="icon">🤖</div>
+                        <h4>Scikit-learn</h4>
+                        <p>Machine Learning</p>
+                    </div>
+                    <div class="card tech-item glass-panel premium-hover">
+                        <div class="icon">🐼</div>
+                        <h4>Pandas</h4>
+                        <p>Data Processing</p>
+                    </div>
+                    <div class="card tech-item glass-panel premium-hover">
+                        <div class="icon">📄</div>
+                        <h4>HTML / CSS / JS</h4>
+                        <p>Frontend Web</p>
+                    </div>
+                    <div class="card tech-item glass-panel premium-hover">
+                        <div class="icon">📊</div>
+                        <h4>Chart.js</h4>
+                        <p>Data Visualization</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team -->
+        <section class="section reveal">
+            <div class="container">
+                <h2 class="section-title" style="text-align:center;">Sinh viên thực hiện</h2>
+                <p class="section-subtitle" style="text-align:center; margin:0 auto 40px;">Đồ án cá nhân</p>
+
+                <div class="team-grid stagger" style="display: flex; justify-content: center;">
+                    <div class="card team-card" style="max-width: 300px; width: 100%;">
+                        <div class="team-avatar">👨‍💻</div>
+                        <div class="team-name">Huỳnh Phú Thịnh</div>
+                        <div class="team-role">Sinh viên thực hiện</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section reveal" id="faq" style="background:var(--bg-secondary);">
+            <div class="container" style="max-width:800px;">
+                <h2 class="section-title" style="text-align:center;">Câu hỏi thường gặp</h2>
+                <p class="section-subtitle" style="text-align:center; margin:0 auto 40px;">Giải đáp thắc mắc về
+                    AutoVision.AI</p>
+
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+                        AI dự đoán giá xe chính xác bao nhiêu phần trăm?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            Mô hình AI của chúng tôi đạt độ chính xác R² Score = 87.4%, nghĩa là có thể giải thích 87.4%
+                            sự biến thiên của giá xe. Đây là mức chính xác khá tốt cho dự đoán giá trên dữ liệu thực tế.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+                        Dữ liệu được lấy từ đâu?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            Dữ liệu được thu thập và tổng hợp từ thị trường xe ô tô Việt Nam, bao gồm giá bán thực tế,
+                            thông số kỹ thuật và thông tin từ các sàn giao dịch xe second-hand uy tín, với hơn 300 bản
+                            ghi từ 19 hãng xe.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+                        Thuật toán AI nào được sử dụng?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            Chúng tôi sử dụng Gradient Boosting Regressor từ thư viện Scikit-learn. Đây là thuật toán
+                            ensemble learning mạnh mẽ, kết hợp nhiều cây quyết định yếu để tạo thành mô hình dự đoán
+                            chính xác.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+                        Những yếu tố nào ảnh hưởng đến giá xe?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            Theo phân tích Feature Importance: Hãng xe (39.3%) và Dòng xe (28.9%) là hai yếu tố quan
+                            trọng nhất. Tiếp theo là Xuất xứ (16%), Số km đã đi (8%), Nhiên liệu (4.7%), Hộp số (2.2%),
+                            và Năm sản xuất (0.9%).
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+                        Dữ liệu dự đoán có được lưu lại không?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            Có, các kết quả dự đoán được lưu trong trình duyệt (localStorage) của bạn. Bạn có thể xem
+                            lại tại trang "Lịch sử" hoặc xuất ra file CSV. Dữ liệu hoàn toàn riêng tư và không gửi lên
+                            server.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/components.js"></script>
+    <script>
+        function toggleFaq(btn) {
+            const wasOpen = btn.classList.contains('open');
+            // Close all
+            document.querySelectorAll('.faq-q').forEach(q => q.classList.remove('open'));
+            // Toggle clicked
+            if (!wasOpen) btn.classList.add('open');
+        }
+    </script>
+</body>
+
+</html>

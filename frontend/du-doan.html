@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dự đoán giá xe ô tô bằng AI - Nhập thông tin xe và nhận kết quả ngay lập tức">
+    <title>Dự đoán giá xe - AutoVision.AI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+    <!-- jsPDF for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        .predict-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        .result-panel {
+            position: sticky;
+            top: 100px;
+        }
+
+        .price-display {
+            text-align: center;
+            padding: 40px 32px;
+        }
+
+        .price-main {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 16px 0 8px;
+        }
+
+        .price-range {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        .confidence-bar {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--bg-glass);
+            overflow: hidden;
+            margin: 12px 0;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: var(--accent-gradient);
+            transition: width 1s ease-out;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .detail-row:last-child {
+            border: none;
+        }
+
+        .detail-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .slider-value {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slider-value span {
+            color: var(--accent-secondary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .result-placeholder {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .result-placeholder .icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .predict-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-panel {
+                position: static;
+            }
+        }
+
+        /* Print / PDF styles */
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+
+            nav,
+            .page-header,
+            footer,
+            #nav-placeholder,
+            #footer-placeholder,
+            .card:not(#resultCard) {
+                display: none !important;
+            }
+
+            .predict-layout {
+                display: block !important;
+            }
+
+            .result-panel {
+                position: static !important;
+            }
+
+            #resultCard {
+                border: 1px solid #ddd !important;
+                box-shadow: none !important;
+            }
+
+            .price-main {
+                -webkit-text-fill-color: #0ea5e9 !important;
+                color: #0ea5e9 !important;
+            }
+
+            .print-hide {
+                display: none !important;
+            }
+
+            #resultPlaceholder {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <section class="page-header">
+            <h1>🎯 Dự đoán <span>giá xe</span></h1>
+            <p>Nhập thông tin chiếc xe bạn quan tâm để nhận kết quả dự đoán từ AI</p>
+        </section>
+
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="predict-layout">
+                    <!-- Input Form -->
+                    <div class="card animate-fade-up glass-panel">
+                        <h3
+                            style="font-size: 1.25rem; font-weight: 800; margin-bottom: 28px; display:flex; align-items:center; gap:12px;">
+                            <span
+                                style="width:40px;height:40px;border-radius:12px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;box-shadow: var(--shadow-sm);">📋</span>
+                            <span class="text-gradient">Thông tin chi tiết</span>
+                        </h3>
+
+                        <form id="predictForm">
+                            <!-- Brand & Model -->
+                            <div class="input-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Hãng xe</label>
+                                    <select class="form-select" id="brand" required>
+                                        <option value="">-- Chọn hãng xe --</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Dòng xe</label>
+                                    <select class="form-select" id="carName" required disabled>
+                                        <option value="">-- Chọn dòng xe --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Year & Fuel -->
+                            <div class="input-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Năm sản xuất</label>
+                                    <select class="form-select" id="year" required>
+                                        <option value="">-- Chọn năm --</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Nhiên liệu</label>
+                                    <select class="form-select" id="fuel" required>
+                                        <option value="">-- Chọn loại --</option>
+                                        <option value="Petrol">Petrol (Xăng)</option>
+                                        <option value="Diesel">Diesel (Dầu)</option>
+                                        <option value="CNG">CNG</option>
+                                        <option value="LPG">LPG</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Transmission & Owner -->
+                            <div class="input-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Hộp số</label>
+                                    <select class="form-select" id="transmission" required>
+                                        <option value="">-- Chọn loại --</option>
+                                        <option value="Manual">Manual (Số sàn)</option>
+                                        <option value="Automatic">Automatic (Tự động)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Chủ sở hữu</label>
+                                    <select class="form-select" id="owner" required>
+                                        <option value="">-- Chọn --</option>
+                                        <option value="First Owner">First Owner (Đời 1)</option>
+                                        <option value="Second Owner">Second Owner (Đời 2)</option>
+                                        <option value="Third Owner">Third Owner (Đời 3)</option>
+                                        <option value="Fourth & Above Owner">Fourth+ Owner (Đời 4+)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Condition & Origin -->
+                            <div class="input-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Tình trạng xe</label>
+                                    <select class="form-select" id="condition" required onchange="updateConditionHelp()">
+                                        <option value="Mới (New) - 100%">Mới (New) - 100%</option>
+                                        <option value="Tốt (Good) - 80-90%">Tốt (Good) - 80-90%</option>
+                                        <option value="Trung bình (Fair) - 60-79%">Trung bình (Fair) - 60-79%</option>
+                                        <option value="Kém (Poor) - 40-59%">Kém (Poor) - 40-59%</option>
+                                        <option value="Rất kém (Damaged) - dưới 40%">Rất kém (Damaged) - dưới 40%</option>
+                                    </select>
+                                    <div id="conditionHelp" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; min-height: 48px; line-height: 1.4;">
+                                        Xe chưa sử dụng, không trầy xước, không tai nạn, nội ngoại thất nguyên bản.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Xuất xứ</label>
+                                    <select class="form-select" id="origin" required>
+                                        <option value="Lắp ráp trong nước">Lắp ráp trong nước (CKD)</option>
+                                        <option value="Nhập khẩu">Nhập khẩu (CBU)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Color -->
+                            <div class="form-group">
+                                <label class="form-label">Màu xe</label>
+                                <select class="form-select" id="color" required>
+                                    <option value="">-- Chọn màu xe --</option>
+                                    <option value="Trắng Bạch Kim">Trắng Bạch Kim</option>
+                                    <option value="Đen Ngọc Trai">Đen Ngọc Trai</option>
+                                    <option value="Bạc Titan">Bạc Titan</option>
+                                    <option value="Đỏ Cherry">Đỏ Cherry</option>
+                                    <option value="Xanh Dương">Xanh Dương</option>
+                                    <option value="Xám Khói">Xám Khói</option>
+                                    <option value="Khác">Tuỳ chọn khác</option>
+                                </select>
+                            </div>
+
+                            <!-- KM Slider -->
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <div class="slider-value">
+                                        Số km đã đi
+                                        <span id="kmValue">30,000 km</span>
+                                    </div>
+                                </label>
+                                <input type="range" class="form-range" id="kmDriven" min="0" max="300000" value="30000"
+                                    step="1000">
+                                <div
+                                    style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:0.75rem; margin-top:4px;">
+                                    <span>0 km</span><span>300,000 km</span>
+                                </div>
+                            </div>
+
+                            <!-- Engine & Power (optional) -->
+                            <div class="input-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Dung tích (cc)</label>
+                                    <input type="number" class="form-input" id="engine" placeholder="vd: 1200"
+                                        value="1200" min="500" max="6000">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Công suất (bhp)</label>
+                                    <input type="number" class="form-input" id="maxPower" placeholder="vd: 80"
+                                        value="80" min="20" max="500">
+                                </div>
+                            </div>
+
+                            <div class="input-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Mức tiêu thụ nhiện liệu (km/l)</label>
+                                    <input type="number" class="form-input" id="mileage" placeholder="vd: 18" value="18"
+                                        min="5" max="50" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Số chỗ ngồi</label>
+                                    <select class="form-select" id="seats">
+                                        <option value="4">4 chỗ</option>
+                                        <option value="5" selected>5 chỗ</option>
+                                        <option value="6">6 chỗ</option>
+                                        <option value="7">7 chỗ</option>
+                                        <option value="8">8 chỗ</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg" style="width:100%; margin-top:8px"
+                                id="predictBtn">
+                                🤖 Dự đoán giá xe
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Result Panel -->
+                    <div class="result-panel">
+                        <div class="card glass-panel" id="resultCard" style="border: 1px solid var(--accent-glow); overflow: hidden;">
+                            <div class="result-placeholder" id="resultPlaceholder">
+                                <div class="icon">🔮</div>
+                                <h3 style="font-weight:700; margin-bottom:8px;">Chờ dự đoán</h3>
+                                <p style="color:var(--text-muted); font-size:0.9rem;">Điền thông tin xe bên trái và nhấn
+                                    "Dự đoán giá xe" để xem kết quả.</p>
+                            </div>
+
+                            <div id="resultContent" style="display:none;">
+                                <div class="price-display">
+                                    <span class="badge badge-success" id="resultBadge">✨ Kết quả dự đoán</span>
+                                    <div class="price-main" id="resultPrice">--</div>
+                                    <div class="price-range" id="resultRange">--</div>
+                                    <div style="margin-top:16px;">
+                                        <div
+                                            style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px;">
+                                            <span style="color:var(--text-muted);">Độ tin cậy</span>
+                                            <span style="font-weight:600;" id="resultConfidence">--%</span>
+                                        </div>
+                                        <div class="confidence-bar">
+                                            <div class="confidence-fill" id="confidenceBar" style="width:0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding: 0 28px 28px;">
+                                    <h4
+                                        style="font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); margin-bottom:12px;">
+                                        Chi tiết xe</h4>
+                                    <div id="resultDetails"></div>
+                                    <div class="print-hide" style="margin-top: 20px; display:flex; gap:12px;">
+                                        <button class="btn btn-secondary btn-sm" style="flex:1"
+                                            onclick="downloadPDF()">📄 Tải PDF</button>
+                                        <button class="btn btn-ghost btn-sm" style="flex:1" onclick="resetForm()">🔄 Dự
+                                            đoán lại</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="resultLoading" style="display:none; text-align:center; padding:60px 20px;">
+                                <div class="loader" style="margin:0 auto 20px;"></div>
+                                <p style="color:var(--text-secondary);">AI đang phân tích dữ liệu...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/components.js"></script>
+    <script>
+        let lastPrediction = null;
+
+        // Load brands
+        async function loadBrands() {
+            const data = await fetchAPI('/brands');
+            const select = document.getElementById('brand');
+            if (data && data.brands) {
+                data.brands.forEach(b => {
+                    const opt = document.createElement('option');
+                    opt.value = b.name;
+                    opt.textContent = `${b.name} (${b.count})`;
+                    select.appendChild(opt);
+                });
+            }
+        }
+
+        // Load models by brand
+        async function loadModels(brand) {
+            const select = document.getElementById('carName');
+            select.innerHTML = '<option value="">-- Đang tải... --</option>';
+            select.disabled = true;
+            const data = await fetchAPI(`/models/${encodeURIComponent(brand)}`);
+            select.innerHTML = '<option value="">-- Chọn dòng xe --</option>';
+            if (data && data.models) {
+                data.models.forEach(m => {
+                    const opt = document.createElement('option');
+                    opt.value = m; opt.textContent = m;
+                    select.appendChild(opt);
+                });
+                select.disabled = false;
+            }
+        }
+
+        // Populate years
+        function loadYears() {
+            const select = document.getElementById('year');
+            for (let y = 2024; y >= 1995; y--) {
+                const opt = document.createElement('option');
+                opt.value = y; opt.textContent = y;
+                select.appendChild(opt);
+            }
+        }
+
+        // Brand change
+        document.getElementById('brand').addEventListener('change', (e) => {
+            if (e.target.value) loadModels(e.target.value);
+            else {
+                document.getElementById('carName').innerHTML = '<option value="">-- Chọn dòng xe --</option>';
+                document.getElementById('carName').disabled = true;
+            }
+        });
+
+        // KM slider
+        document.getElementById('kmDriven').addEventListener('input', (e) => {
+            document.getElementById('kmValue').textContent = formatNumber(e.target.value) + ' km';
+        });
+
+        // Form submit
+        document.getElementById('predictForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            let userId = null;
+            try {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user && user.id) userId = user.id;
+            } catch (e) { }
+
+            const inputData = {
+                name: document.getElementById('carName').value,
+                year: parseInt(document.getElementById('year').value),
+                km_driven: parseInt(document.getElementById('kmDriven').value),
+                fuel: document.getElementById('fuel').value,
+                transmission: document.getElementById('transmission').value,
+                owner: document.getElementById('owner').value,
+                condition: document.getElementById('condition').value,
+                origin: document.getElementById('origin').value,
+                color: document.getElementById('color').value,
+                engine: parseFloat(document.getElementById('engine').value) || null,
+                max_power: parseFloat(document.getElementById('maxPower').value) || null,
+                mileage: parseFloat(document.getElementById('mileage').value) || null,
+                seats: parseInt(document.getElementById('seats').value),
+                user_id: userId
+            };
+
+            document.getElementById('resultPlaceholder').style.display = 'none';
+            document.getElementById('resultContent').style.display = 'none';
+            document.getElementById('resultLoading').style.display = 'block';
+
+            const result = await fetchAPI('/predict', {
+                method: 'POST',
+                body: JSON.stringify(inputData)
+            });
+
+            document.getElementById('resultLoading').style.display = 'none';
+
+            if (result && result.predicted_price) {
+                lastPrediction = { input: inputData, result };
+                showResult(inputData, result);
+            } else {
+                document.getElementById('resultPlaceholder').style.display = 'block';
+                document.getElementById('resultPlaceholder').innerHTML = `
+          <div class="icon">⚠️</div>
+          <h3 style="font-weight:700; margin-bottom:8px; color:var(--warning);">Lỗi kết nối</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem;">Backend chưa chạy. Chạy: <code>python run.py</code></p>
+        `;
+            }
+        });
+
+        // Condition Help Detail
+        function updateConditionHelp() {
+            const val = document.getElementById('condition').value;
+            const helpEl = document.getElementById('conditionHelp');
+            let text = "";
+            if (val.includes("Mới")) {
+                text = "Xe chưa sử dụng, không trầy xước, không tai nạn, nội ngoại thất nguyên bản.";
+            } else if (val.includes("Tốt")) {
+                text = "Xe có sử dụng nhưng còn rất tốt. Có thể trầy sơn nhẹ, mòn lốp nhẹ, nội thất hơi cũ. Không tai nạn lớn.";
+            } else if (val.includes("Trung bình")) {
+                text = "Có thể trầy sơn nhiều, nội thất cũ, từng tai nạn nhẹ, thay kính hoặc thay cản. Không ảnh hưởng khung.";
+            } else if (val.includes("Kém")) {
+                text = "Có thể từng tai nạn vừa, thân xe móp nhiều, động cơ xuống cấp, xe chạy rất nhiều km.";
+            } else if (val.includes("Rất kém")) {
+                text = "Xe bị hư hỏng nặng: tai nạn lớn biến dạng khung xe, ngập nước hoặc động cơ cần đại tu.";
+            }
+            helpEl.textContent = text;
+        }
+
+        function showResult(input, result) {
+            document.getElementById('resultContent').style.display = 'block';
+            document.getElementById('resultPrice').textContent = formatPrice(result.predicted_price);
+            document.getElementById('resultRange').textContent =
+                `Khoảng: ${formatPrice(result.confidence_low)} - ${formatPrice(result.confidence_high)}`;
+
+            const conf = result.confidence_percent || 85;
+            document.getElementById('resultConfidence').textContent = conf + '%';
+            setTimeout(() => { document.getElementById('confidenceBar').style.width = conf + '%'; }, 100);
+
+            const details = [
+                ['Tên xe', input.name],
+                ['Năm SX', input.year],
+                ['Số km', formatNumber(input.km_driven) + ' km'],
+                ['Nhiên liệu', input.fuel],
+                ['Hộp số', input.transmission],
+                ['Chủ sở hữu', input.owner],
+                ['Tình trạng', input.condition],
+                ['Xuất xứ', input.origin],
+                ['Màu xe', input.color],
+                ['Dung tích', (input.engine || '-') + ' cc'],
+                ['Công suất', (input.max_power || '-') + ' bhp'],
+            ];
+            document.getElementById('resultDetails').innerHTML = details.map(([l, v]) => `
+        <div class="detail-row"><span class="detail-label">${l}</span><span class="detail-value">${v}</span></div>
+      `).join('');
+        }
+
+        // Bỏ dấu tiếng Việt vì jsPDF font mặc định không hỗ trợ Unicode
+        function vn(str) {
+            if (!str && str !== 0) return '-';
+            return String(str)
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/đ/g, 'd').replace(/Đ/g, 'D');
+        }
+
+        async function downloadPDF() {
+            if (!lastPrediction) return;
+
+            const btn = document.querySelector('[onclick="downloadPDF()"]');
+            if (btn) { btn.textContent = '⏳ Đang tạo PDF...'; btn.disabled = true; }
+
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+            const W = 210, H = 297;
+            const { input, result } = lastPrediction;
+            const price = vn(formatPrice(result.predicted_price));
+            const priceRange = `${vn(formatPrice(result.confidence_low))} - ${vn(formatPrice(result.confidence_high))}`;
+            const conf = result.confidence_percent || 85;
+            const now = vn(new Date().toLocaleString('vi-VN'));
+
+            // ===== Nền trắng =====
+            pdf.setFillColor(255, 255, 255);
+            pdf.rect(0, 0, W, H, 'F');
+
+            // ===== Header gradient (giả lập bằng 2 hình chữ nhật) =====
+            pdf.setFillColor(14, 165, 233);   // Cyan
+            pdf.rect(0, 0, W, 48, 'F');
+            pdf.setFillColor(59, 130, 246);  // Azure (overlay)
+            pdf.rect(W * 0.4, 0, W * 0.6, 48, 'F');
+
+            // Logo + tên thương hiệu
+            pdf.setTextColor(255, 255, 255);
+            pdf.setFontSize(22);
+            pdf.setFont('helvetica', 'bold');
+            pdf.text('AutoVision.AI', 15, 22);
+            pdf.setFontSize(10);
+            pdf.setFont('helvetica', 'normal');
+            pdf.text('Ket qua du doan gia xe bang AI', 15, 32);
+
+            // Ngày giờ (phải)
+            pdf.setFontSize(9);
+            pdf.text(now, W - 15, 32, { align: 'right' });
+
+            // ===== Card giá chính =====
+            pdf.setFillColor(240, 249, 255);
+            pdf.roundedRect(12, 55, W - 24, 52, 4, 4, 'F');
+            pdf.setFillColor(14, 165, 233);
+            pdf.roundedRect(12, 55, 4, 52, 2, 2, 'F');  // thanh dọc xanh
+
+            // Tên xe
+            pdf.setTextColor(14, 165, 233);
+            pdf.setFontSize(14);
+            pdf.setFont('helvetica', 'bold');
+            const carName = vn(input.name || 'Xe');
+            const nameLines = pdf.splitTextToSize(carName, W - 44);
+            pdf.text(nameLines, 22, 67);
+
+            // Giá dự đoán
+            pdf.setFontSize(28);
+            pdf.setTextColor(14, 165, 233);
+            pdf.text(price, 22, 87);
+
+            // Khoảng giá
+            pdf.setFontSize(9);
+            pdf.setTextColor(14, 165, 233);
+            pdf.text(`Khoang gia: ${priceRange}`, 22, 97);
+
+            // Độ tin cậy bar
+            pdf.setFillColor(224, 242, 254);
+            pdf.roundedRect(W - 80, 68, 60, 6, 3, 3, 'F');
+            pdf.setFillColor(14, 165, 233);
+            pdf.roundedRect(W - 80, 68, 60 * conf / 100, 6, 3, 3, 'F');
+            pdf.setFontSize(8);
+            pdf.setTextColor(14, 165, 233);
+            pdf.text(`Do tin cay: ${conf}%`, W - 80, 65);
+
+            // ===== Bảng chi tiết =====
+            const rows = [
+                ['Ten xe', vn(input.name || '-')],
+                ['Nam san xuat', String(input.year || '-')],
+                ['So km da di', formatNumber(input.km_driven || 0) + ' km'],
+                ['Nhien lieu', vn(input.fuel || '-')],
+                ['Hop so', vn(input.transmission || '-')],
+                ['Chu so huu', vn(input.owner || '-')],
+                ['Tinh trang', vn(input.condition || '-')],
+                ['Xuat xu', vn(input.origin || '-')],
+                ['Mau xe', vn(input.color || '-')],
+                ['Dung tich dong co', (input.engine || '-') + ' cc'],
+                ['Cong suat toi da', (input.max_power || '-') + ' bhp'],
+                ['Muc tieu thu NL', (input.mileage || '-') + ' km/L'],
+                ['So cho ngoi', (input.seats || '-') + ' cho'],
+            ];
+
+            let y = 122;
+            pdf.setFillColor(240, 249, 255);
+            pdf.rect(12, y, W - 24, 8, 'F');
+            pdf.setFontSize(8);
+            pdf.setFont('helvetica', 'bold');
+            pdf.setTextColor(14, 165, 233);
+            pdf.text('THONG TIN CHI TIET', 16, y + 5.5);
+            y += 10;
+
+            rows.forEach((row, i) => {
+                const bg = i % 2 === 0 ? [255, 255, 255] : [240, 249, 255];
+                pdf.setFillColor(...bg);
+                pdf.rect(12, y, W - 24, 9, 'F');
+
+                pdf.setFont('helvetica', 'normal');
+                pdf.setFontSize(9);
+                pdf.setTextColor(100, 100, 120);
+                pdf.text(row[0], 17, y + 6);
+
+                pdf.setFont('helvetica', 'bold');
+                pdf.setTextColor(30, 30, 50);
+                pdf.text(row[1], W - 17, y + 6, { align: 'right' });
+
+                // Đường kẻ
+                pdf.setDrawColor(220, 215, 240);
+                pdf.setLineWidth(0.2);
+                pdf.line(12, y + 9, W - 12, y + 9);
+                y += 9;
+            });
+
+            // ===== Footer =====
+            const footerY = H - 18;
+            pdf.setFillColor(240, 249, 255);
+            pdf.rect(0, footerY - 4, W, 22, 'F');
+            pdf.setFillColor(14, 165, 233);
+            pdf.rect(0, footerY - 4, W, 1.5, 'F');
+
+            pdf.setFontSize(8);
+            pdf.setFont('helvetica', 'normal');
+            pdf.setTextColor(14, 165, 233);
+            pdf.text('AutoVision.AI - He thong du doan gia xe bang AI', 15, footerY + 5);
+            pdf.text('Ket qua mang tinh tham khao, khong phai bao gia chinh thuc', W - 15, footerY + 5, { align: 'right' });
+
+            // ===== Download =====
+            const fileName = `DuDoan_${(input.name || 'xe').replace(/\s+/g, '_')}_${input.year || ''}.pdf`;
+            pdf.save(fileName);
+
+            if (btn) { btn.textContent = '📄 Tải PDF'; btn.disabled = false; }
+        }
+
+        function resetForm() {
+            document.getElementById('predictForm').reset();
+            document.getElementById('carName').innerHTML = '<option value="">-- Chọn dòng xe --</option>';
+            document.getElementById('carName').disabled = true;
+            document.getElementById('kmValue').textContent = '30,000 km';
+            document.getElementById('resultContent').style.display = 'none';
+            document.getElementById('resultPlaceholder').style.display = 'block';
+            document.getElementById('resultPlaceholder').innerHTML = `
+        <div class="icon">🔮</div>
+        <h3 style="font-weight:700; margin-bottom:8px;">Chờ dự đoán</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Điền thông tin bên trái để xem kết quả.</p>
+      `;
+            lastPrediction = null;
+        }
+
+        loadBrands();
+        loadYears();
+    </script>
+</body>
+
+</html>

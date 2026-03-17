@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Phân tích thị trường xe ô tô Việt Nam - Biểu đồ, xu hướng giá, so sánh hãng xe">
+    <title>Phân tích thị trường - AutoVision.AI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .chart-card {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .chart-card-header {
+            padding: 20px 24px 0;
+        }
+
+        .chart-card-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .chart-card-header p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .stats-bar .card {
+            flex: 1;
+            min-width: 180px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stats-bar .stat-value {
+            font-size: 1.8rem;
+        }
+
+        .ranking-list {
+            padding: 0 24px 24px;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .ranking-item:last-child {
+            border: none;
+        }
+
+        .ranking-num {
+            width: 28px;
+            height: 28px;
+            border-radius: var(--radius-full);
+            background: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--accent-secondary);
+            flex-shrink: 0;
+        }
+
+        .ranking-info {
+            flex: 1;
+        }
+
+        .ranking-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .ranking-sub {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .ranking-price {
+            font-weight: 700;
+            color: var(--accent-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <section class="page-header">
+            <h1>📊 Phân tích <span>thị trường</span></h1>
+            <p>Biểu đồ và dữ liệu chi tiết về thị trường xe ô tô Việt Nam</p>
+        </section>
+
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <!-- Quick Stats -->
+                <div class="stats-bar stagger" id="quickStats">
+                    <div class="card">
+                        <div class="stat-value" id="qsAvgPrice">--</div>
+                        <div class="stat-label">Giá trung bình</div>
+                    </div>
+                    <div class="card">
+                        <div class="stat-value" id="qsMinPrice">--</div>
+                        <div class="stat-label">Giá thấp nhất</div>
+                    </div>
+                    <div class="card">
+                        <div class="stat-value" id="qsMaxPrice">--</div>
+                        <div class="stat-label">Giá cao nhất</div>
+                    </div>
+                    <div class="card">
+                        <div class="stat-value" id="qsTotalData">--</div>
+                        <div class="stat-label">Bản ghi dữ liệu</div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="chart-grid">
+                    <!-- Brand Comparison -->
+                    <div class="card chart-card">
+                        <div class="chart-card-header">
+                            <h3>💰 Giá trung bình theo hãng xe</h3>
+                            <p>So sánh mức giá trung bình của các hãng</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="brandChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Price Distribution -->
+                    <div class="card chart-card">
+                        <div class="chart-card-header">
+                            <h3>📈 Phân bổ giá xe</h3>
+                            <p>Số lượng xe theo khoảng giá</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="distributionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Year Trend -->
+                    <div class="card chart-card full-width">
+                        <div class="chart-card-header">
+                            <h3>📅 Xu hướng giá theo năm sản xuất</h3>
+                            <p>Giá trung bình thay đổi theo năm</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="yearChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Fuel Comparison -->
+                    <div class="card chart-card">
+                        <div class="chart-card-header">
+                            <h3>⛽ Giá theo loại nhiên liệu</h3>
+                            <p>So sánh giá trung bình theo nhiên liệu</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="fuelChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Segment Analysis -->
+                    <div class="card chart-card">
+                        <div class="chart-card-header">
+                            <h3>🏷️ Phân khúc thị trường</h3>
+                            <p>Phân bổ xe theo phân khúc giá</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="segmentChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Top Models Ranking -->
+                    <div class="card chart-card full-width">
+                        <div class="chart-card-header">
+                            <h3>🏆 Top dòng xe phổ biến</h3>
+                            <p>Các dòng xe có nhiều dữ liệu nhất</p>
+                        </div>
+                        <div class="ranking-list" id="rankingList">
+                            <div style="text-align:center; padding:40px;">
+                                <div class="loader" style="margin:0 auto;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/components.js"></script>
+    <script>
+        // Chart.js global config
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
+        Chart.defaults.font.family = 'Inter, sans-serif';
+
+        const gradientColors = [
+            'rgba(99, 102, 241, 0.8)', 'rgba(139, 92, 246, 0.8)', 'rgba(167, 139, 250, 0.8)',
+            'rgba(59, 130, 246, 0.8)', 'rgba(16, 185, 129, 0.8)', 'rgba(245, 158, 11, 0.8)',
+            'rgba(239, 68, 68, 0.8)', 'rgba(236, 72, 153, 0.8)', 'rgba(14, 165, 233, 0.8)',
+        ];
+
+        async function loadAnalysis() {
+            const [stats, trends] = await Promise.all([
+                fetchAPI('/stats'),
+                fetchAPI('/market-trends')
+            ]);
+
+            if (stats) {
+                document.getElementById('qsAvgPrice').textContent = formatPrice(stats.avg_price);
+                document.getElementById('qsMinPrice').textContent = formatPrice(stats.min_price);
+                document.getElementById('qsMaxPrice').textContent = formatPrice(stats.max_price);
+                document.getElementById('qsTotalData').textContent = stats.total_records;
+            }
+
+            if (trends) {
+                createBrandChart(trends.brand_comparison);
+                createDistributionChart(trends.price_distribution);
+                createYearChart(trends.year_trend);
+                createFuelChart(trends.fuel_comparison);
+                createSegmentChart(trends.segment_analysis);
+                createRanking(trends.top_models);
+            } else {
+                document.querySelectorAll('.chart-container').forEach(el => {
+                    el.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:60px 0;">⚠️ Không thể tải dữ liệu. Hãy chạy backend server.</p>';
+                });
+            }
+        }
+
+        function createBrandChart(data) {
+            const ctx = document.getElementById('brandChart');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.slice(0, 12).map(d => d.brand),
+                    datasets: [{
+                        label: 'Giá TB (triệu VND)',
+                        data: data.slice(0, 12).map(d => d.avg_price),
+                        backgroundColor: gradientColors,
+                        borderRadius: 6,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.03)' } },
+                        x: { grid: { display: false }, ticks: { maxRotation: 45 } }
+                    }
+                }
+            });
+        }
+
+        function createDistributionChart(data) {
+            const ctx = document.getElementById('distributionChart');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(d => d.label),
+                    datasets: [{
+                        label: 'Số lượng xe',
+                        data: data.map(d => d.count),
+                        backgroundColor: 'rgba(99, 102, 241, 0.6)',
+                        borderColor: 'rgba(99, 102, 241, 1)',
+                        borderWidth: 1,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.03)' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function createYearChart(data) {
+            const ctx = document.getElementById('yearChart');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(d => d.year),
+                    datasets: [{
+                        label: 'Giá TB (triệu VND)',
+                        data: data.map(d => d.avg_price),
+                        borderColor: '#6366f1',
+                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#6366f1',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                    }, {
+                        label: 'Số lượng xe',
+                        data: data.map(d => d.count),
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.05)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#10b981',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        yAxisID: 'y1',
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top' } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.03)' }, title: { display: true, text: 'Giá (triệu VND)' } },
+                        y1: { position: 'right', beginAtZero: true, grid: { display: false }, title: { display: true, text: 'Số lượng' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function createFuelChart(data) {
+            const ctx = document.getElementById('fuelChart');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.map(d => d.fuel_type),
+                    datasets: [{
+                        data: data.map(d => d.avg_price),
+                        backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#ef4444'],
+                        borderColor: 'transparent',
+                        borderWidth: 2,
+                        hoverOffset: 10,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true } }
+                    },
+                    cutout: '60%',
+                }
+            });
+        }
+
+        function createSegmentChart(data) {
+            const ctx = document.getElementById('segmentChart');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: data.map(d => d.segment),
+                    datasets: [{
+                        data: data.map(d => d.count),
+                        backgroundColor: ['#10b981', '#3b82f6', '#6366f1', '#f59e0b', '#ef4444'],
+                        borderColor: 'transparent',
+                        hoverOffset: 10,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { padding: 12, usePointStyle: true, font: { size: 11 } } }
+                    }
+                }
+            });
+        }
+
+        function createRanking(data) {
+            const el = document.getElementById('rankingList');
+            if (!data || data.length === 0) {
+                el.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">Không có dữ liệu</p>';
+                return;
+            }
+            el.innerHTML = data.slice(0, 10).map((item, i) => `
+        <div class="ranking-item">
+          <div class="ranking-num">${i + 1}</div>
+          <div class="ranking-info">
+            <div class="ranking-name">${item.full_name}</div>
+            <div class="ranking-sub">${item.count} bản ghi dữ liệu</div>
+          </div>
+          <div class="ranking-price">${formatPrice(item.avg_price)}</div>
+        </div>
+      `).join('');
+        }
+
+        loadAnalysis();
+    </script>
+</body>
+
+</html>

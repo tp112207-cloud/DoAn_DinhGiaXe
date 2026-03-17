@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lịch sử dự đoán giá xe - Xem lại các lần dự đoán trước">
+    <title>Lịch sử dự đoán - AutoVision.AI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+    <style>
+        .history-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .history-count {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .history-card {
+            display: flex;
+            align-items: center;
+            padding: 20px 24px;
+            gap: 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .history-card:hover {
+            transform: translateX(4px);
+        }
+
+        .history-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .history-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .history-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .history-meta {
+            display: flex;
+            gap: 16px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .history-price {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .history-price-value {
+            font-size: 1.2rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .history-price-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-state .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .detail-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .detail-modal.open {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            max-width: 500px;
+            width: 100%;
+            padding: 32px;
+            animation: fadeInUp 0.3s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border-glass);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-glass);
+            font-size: 0.9rem;
+        }
+
+        .detail-row:last-child {
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .history-card {
+                flex-wrap: wrap;
+            }
+
+            .history-price {
+                width: 100%;
+                text-align: left;
+                margin-top: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <section class="page-header">
+            <h1>📋 Lịch sử <span>dự đoán</span></h1>
+            <p>Xem lại tất cả các lần dự đoán giá xe trước đây</p>
+        </section>
+
+        <section class="section" style="padding-top: 0;">
+            <div class="container" style="max-width: 800px;">
+                <div class="history-actions">
+                    <span class="history-count" id="historyCount">0 kết quả</span>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 Xuất CSV</button>
+                        <button class="btn btn-ghost btn-sm" onclick="confirmClear()" style="color:var(--error);">🗑️
+                            Xoá tất cả</button>
+                    </div>
+                </div>
+
+                <div id="historyList"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Detail Modal -->
+    <div class="detail-modal" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="font-weight:700;">📋 Chi tiết dự đoán</h3>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/components.js"></script>
+    <script>
+        let userPredictions = [];
+
+        async function renderHistory() {
+            const list = document.getElementById('historyList');
+            const countEl = document.getElementById('historyCount');
+
+            list.innerHTML = `<div style="text-align:center; padding: 40px;"><div class="loader" style="margin: 0 auto;"></div></div>`;
+
+            let userId = null;
+            try {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user && user.id) userId = user.id;
+            } catch (e) { }
+
+            if (!userId) {
+                countEl.textContent = `0 kết quả`;
+                list.innerHTML = `
+          <div class="card empty-state">
+            <div class="icon">🔒</div>
+            <h3 style="font-weight:700; margin-bottom:12px;">Vui lòng đăng nhập</h3>
+            <p style="color:var(--text-muted); margin-bottom:24px;">Bạn cần đăng nhập để xem lịch sử dự đoán của mình.</p>
+            <a href="dang-nhap.html" class="btn btn-primary">🔐 Đăng nhập ngay</a>
+          </div>
+        `;
+                return;
+            }
+
+            const data = await fetchAPI(`/history?user_id=${userId}`);
+            userPredictions = data || [];
+
+            countEl.textContent = `${userPredictions.length} kết quả`;
+
+            if (userPredictions.length === 0) {
+                list.innerHTML = `
+          <div class="card empty-state">
+            <div class="icon">📭</div>
+            <h3 style="font-weight:700; margin-bottom:12px;">Chưa có dự đoán nào</h3>
+            <p style="color:var(--text-muted); margin-bottom:24px;">Hãy thử dự đoán giá xe để xem lịch sử tại đây.</p>
+            <a href="du-doan.html" class="btn btn-primary">🎯 Dự đoán ngay</a>
+          </div>
+        `;
+                return;
+            }
+
+            list.innerHTML = userPredictions.map((pred, i) => {
+                const d = new Date(pred.created_at);
+                const timeStr = d.toLocaleDateString('vi-VN') + ' ' + d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+                const carName = pred.car_name || 'N/A';
+                const year = pred.year || '';
+                const km = pred.km_driven || 0;
+                return `
+          <div class="card history-card" onclick="showDetail(${i})">
+            <div class="history-icon">🚗</div>
+            <div class="history-info">
+              <div class="history-title">${carName}</div>
+              <div class="history-meta">
+                <span>📅 ${timeStr}</span>
+                <span>🗓️ ${year}</span>
+                <span>📏 ${formatNumber(km)} km</span>
+              </div>
+            </div>
+            <div class="history-price">
+              <div class="history-price-value">${formatPrice(pred.predicted_price)}</div>
+              <div class="history-price-label">Giá dự đoán</div>
+            </div>
+          </div>
+        `;
+            }).join('');
+        }
+
+        function showDetail(index) {
+            const pred = userPredictions[index];
+            if (!pred) return;
+
+            const d = new Date(pred.created_at);
+            const timeStr = d.toLocaleDateString('vi-VN') + ' ' + d.toLocaleTimeString('vi-VN');
+
+            const carName = pred.car_name || 'N/A';
+            document.getElementById('modalBody').innerHTML = `
+        <div style="text-align:center; padding:16px 0 24px;">
+          <div style="font-size:2.2rem; font-weight:900; background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
+            ${formatPrice(pred.predicted_price)}
+          </div>
+        </div>
+        <div class="detail-row"><span style="color:var(--text-muted)">Thời gian</span><span style="font-weight:600">${timeStr}</span></div>
+        <div class="detail-row"><span style="color:var(--text-muted)">Tên xe</span><span style="font-weight:600">${carName}</span></div>
+        <div class="detail-row"><span style="color:var(--text-muted)">Năm SX</span><span style="font-weight:600">${pred.year || ''}</span></div>
+        <div class="detail-row"><span style="color:var(--text-muted)">Số km</span><span style="font-weight:600">${formatNumber(pred.km_driven || 0)} km</span></div>
+        <div class="detail-row"><span style="color:var(--text-muted)">Nhiên liệu</span><span style="font-weight:600">${pred.fuel || ''}</span></div>
+        <div class="detail-row"><span style="color:var(--text-muted)">Hộp số</span><span style="font-weight:600">${pred.transmission || ''}</span></div>
+        <div class="detail-row"><span style="color:var(--text-muted)">Chủ sở hữu</span><span style="font-weight:600">${pred.owner || ''}</span></div>
+        <div class="detail-row"><span style="color:var(--text-muted)">Độ tin cậy</span><span style="font-weight:600; color:var(--success)">${pred.confidence || 87}%</span></div>
+        <div style="margin-top:20px; display:flex; gap:12px;">
+          <button class="btn btn-primary btn-sm" style="flex:1" onclick="closeModal()">Đóng</button>
+        </div>
+      `;
+            document.getElementById('detailModal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').classList.remove('open');
+        }
+
+        function deletePrediction(index) {
+            // In SQL, this requires a DELETE API endpoint. For now, just alert.
+            alert('Chức năng xoá đang được phát triển.');
+            closeModal();
+        }
+
+        async function confirmClear() {
+            let userId = null;
+            try {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user && user.id) userId = user.id;
+            } catch (e) { }
+
+            if (!userId) {
+                alert('Vui lòng đăng nhập để xoá lịch sử.');
+                return;
+            }
+
+            if (!confirm('Bạn có chắc chắn muốn xoá tất cả lịch sử dự đoán của mình? Hành động này không thể hoàn tác.')) {
+                return;
+            }
+
+            const result = await fetchAPI('/history', {
+                method: 'DELETE',
+                body: JSON.stringify({ user_id: userId })
+            });
+
+            if (result && !result.error) {
+                alert('Đã xoá lịch sử thành công.');
+                renderHistory();
+            } else {
+                alert('Lỗi: ' + (result?.error || 'Không thể xoá lịch sử'));
+            }
+        }
+
+        function exportCSV() {
+            if (userPredictions.length === 0) { alert('Không có dữ liệu để xuất!'); return; }
+
+            let csv = '\uFEFF'; // BOM UTF-8 để Excel mở đúng tiếng Việt
+            csv += 'Thời gian,Tên xe,Năm SX,Số km,Nhiên liệu,Hộp số,Chủ sở hữu,Giá dự đoán (Triệu VNĐ),Độ tin cậy (%)\n';
+            userPredictions.forEach(p => {
+                const priceTrieu = p.predicted_price ? (p.predicted_price / 1000000).toFixed(0) : '';
+                csv += `${p.created_at},"${p.car_name || ''}",${p.year || ''},${p.km_driven || ''},${p.fuel || ''},${p.transmission || ''},"${p.owner || ''}",${priceTrieu},${p.confidence || ''}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'lich_su_du_doan.csv';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('detailModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+
+        renderHistory();
+    </script>
+</body>
+
+</html>
