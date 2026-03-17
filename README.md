@@ -1,3 +1,12 @@
+---
+title: AutoVision AI
+emoji: 🚗
+colorFrom: azure
+colorTo: emerald
+sdk: docker
+pinned: false
+---
+
 # AutoVision.AI - Đồ án AI Dự đoán Giá Xe
 
 Ứng dụng web sử dụng trí tuệ nhân tạo (Machine Learning) để dự đoán giá xe ô tô tại thị trường Việt Nam.
