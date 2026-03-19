@@ -3,7 +3,7 @@ title: AutoVision AI
 emoji: 🚗
 colorFrom: blue
 colorTo: green
-sdk: docker
+sdk: static
 pinned: false
 ---
 
@@ -27,7 +27,14 @@ python model/train_model.py
 python app.py
 ```
 
-Server sẽ chạy tại: `http://localhost:5000`
+Server sẽ chạy tại: `http://localhost:7860`
+
+### 3. Public ra Internet (Cloudflare Tunnel)
+Để demo cho người khác xem mà không cần cài đặt, bạn có thể dùng Cloudflare Tunnel:
+1. Cài đặt `cloudflared`: `winget install Cloudflare.cloudflared`
+2. Chạy ứng dụng: `python run.py`
+3. Chạy tunnel: nháy đúp file `start_tunnel.bat`
+4. Copy link `.trycloudflare.com` gửi cho bạn bè.
 
 ### 2. Frontend
 
