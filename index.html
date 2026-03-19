@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="AutoVision.AI - Nền tảng AI dự đoán giá xe ô tô chính xác nhất Việt Nam. Sử dụng Machine Learning phân tích dữ liệu thị trường.">
+  <title>AutoVision.AI - Dự đoán giá xe bằng AI</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center;">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span>✨</span> Nền tảng AI Thế hệ mới
+          </div>
+          <h1 style="font-size: 4rem; letter-spacing: -0.02em;">
+            Dự đoán giá xe<br>
+            <span class="text-gradient">Đẳng cấp với AI</span>
+          </h1>
+          <p style="font-size: 1.15rem; max-width: 600px; margin-bottom: 40px;">Sử dụng trí tuệ nhân tạo tiên tiến để phân tích thị trường Việt Nam, giúp bạn biết chính xác giá trị thực của chiếc xe trong vài giây.</p>
+          <div class="hero-actions">
+            <a href="du-doan.html" class="btn btn-primary btn-lg premium-hover">
+              🚀 Bắt đầu ngay
+            </a>
+            <a href="gioi-thieu.html" class="btn btn-secondary btn-lg">
+              Khám phá thêm
+            </a>
+          </div>
+        </div>
+        <div class="hero-visual" style="position: relative; animation: fadeIn 1.2s ease-out;">
+            <div class="glass-panel" style="padding: 30px; border-radius: 30px; position: relative; z-index: 2; overflow: hidden;">
+                <img src="assets/premium_car_ai.png" alt="Supercar AI Preview" style="border-radius: 20px; width: 100%; box-shadow: var(--shadow-lg); transition: 0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <div style="position: absolute; bottom: 40px; right: 40px; padding: 12px 20px; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); border-radius: 12px; color: white; font-weight: 700;">
+                    AI Accuracy: 92.4%
+                </div>
+            </div>
+            <div style="position: absolute; -top: 20px; -left: 20px; width: 100px; height: 100px; background: var(--accent-gradient); border-radius: 50%; filter: blur(40px); opacity: 0.3;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section" style="padding-top: 0">
+      <div class="container">
+        <div class="grid-4 stagger" id="statsGrid">
+          <div class="card stat-card glass-panel premium-hover">
+            <div class="stat-value" id="statBrands">--</div>
+            <div class="stat-label">Hãng xe hỗ trợ</div>
+          </div>
+          <div class="card stat-card glass-panel premium-hover">
+            <div class="stat-value" id="statModels">--</div>
+            <div class="stat-label">Dòng xe hệ thống</div>
+          </div>
+          <div class="card stat-card glass-panel premium-hover">
+            <div class="stat-value" id="statAccuracy">--</div>
+            <div class="stat-label">Độ chính xác AI</div>
+          </div>
+          <div class="card stat-card glass-panel premium-hover">
+            <div class="stat-value" id="statRecords">--</div>
+            <div class="stat-label">Bản ghi dữ liệu</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section reveal">
+      <div class="container">
+        <div style="text-align:center; margin-bottom: 48px;">
+          <h2 class="section-title">Tại sao chọn AutoVision.AI?</h2>
+          <p class="section-subtitle" style="margin:0 auto">Nền tảng dự đoán giá xe thông minh, nhanh chóng và đáng tin
+            cậy</p>
+        </div>
+        <div class="grid-3 stagger">
+          <div class="card" style="text-align:center; padding: 40px 28px;">
+            <div style="font-size: 3rem; margin-bottom: 16px;">🧠</div>
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px;">AI Thông minh</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7;">Sử dụng Gradient Boosting
+              Machine Learning để phân tích nhiều yếu tố và đưa ra dự đoán chính xác.</p>
+          </div>
+          <div class="card" style="text-align:center; padding: 40px 28px;">
+            <div style="font-size: 3rem; margin-bottom: 16px;">⚡</div>
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px;">Kết quả tức thì</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7;">Nhập thông tin xe → Nhận kết
+              quả dự đoán trong vài giây. Không cần đăng ký hay chờ đợi.</p>
+          </div>
+          <div class="card" style="text-align:center; padding: 40px 28px;">
+            <div style="font-size: 3rem; margin-bottom: 16px;">📊</div>
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px;">Phân tích sâu</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7;">Biểu đồ xu hướng giá, so sánh
+              giữa các hãng xe, phân tích phân khúc thị trường chi tiết.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section reveal" style="background: var(--bg-secondary);">
+      <div class="container">
+        <div style="text-align:center; margin-bottom: 48px;">
+          <h2 class="section-title">Cách hoạt động</h2>
+          <p class="section-subtitle" style="margin:0 auto">Chỉ 3 bước đơn giản để biết giá xe</p>
+        </div>
+        <div class="grid-3 stagger">
+          <div class="card glass-panel premium-hover" style="position:relative; padding: 40px 28px; text-align:center;">
+            <div style="position:absolute; top:16px; right:20px; font-size:3rem; font-weight:900; color: var(--accent-glow); opacity:0.2;">01</div>
+            <div style="width:72px; height:72px; border-radius:20px; background:var(--accent-glow); display:flex; align-items:center; justify-content:center; font-size:1.8rem; margin:0 auto 24px; box-shadow: var(--shadow-glow);">📝</div>
+            <h3 style="font-weight:700; margin-bottom:12px; font-size: 1.25rem;">Nhập thông tin</h3>
+            <p style="color:var(--text-secondary); font-size:0.95rem; line-height: 1.6;">Chọn hãng xe, dòng xe, năm sản xuất và các thông số kỹ thuật chi tiết của xe.</p>
+          </div>
+          <div class="card glass-panel premium-hover" style="position:relative; padding: 40px 28px; text-align:center;">
+            <div style="position:absolute; top:16px; right:20px; font-size:3rem; font-weight:900; color: var(--accent-glow); opacity:0.2;">02</div>
+            <div style="width:72px; height:72px; border-radius:20px; background:var(--accent-glow); display:flex; align-items:center; justify-content:center; font-size:1.8rem; margin:0 auto 24px; box-shadow: var(--shadow-glow);">🧠</div>
+            <h3 style="font-weight:700; margin-bottom:12px; font-size: 1.25rem;">AI Phân tích</h3>
+            <p style="color:var(--text-secondary); font-size:0.95rem; line-height: 1.6;">Model Machine Learning phân tích hàng nghìn biến số thị trường trong chớp mắt.</p>
+          </div>
+          <div class="card glass-panel premium-hover" style="position:relative; padding: 40px 28px; text-align:center;">
+            <div style="position:absolute; top:16px; right:20px; font-size:3rem; font-weight:900; color: var(--accent-glow); opacity:0.2;">03</div>
+            <div style="width:72px; height:72px; border-radius:20px; background:var(--accent-glow); display:flex; align-items:center; justify-content:center; font-size:1.8rem; margin:0 auto 24px; box-shadow: var(--shadow-glow);">💎</div>
+            <h3 style="font-weight:700; margin-bottom:12px; font-size: 1.25rem;">Định giá Premium</h3>
+            <p style="color:var(--text-secondary); font-size:0.95rem; line-height: 1.6;">Nhận kết quả định giá chính xác kèm theo biểu đồ phân tích xu hướng giá xe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section reveal">
+      <div class="container" style="text-align:center">
+        <div class="card"
+          style="padding: 60px 40px; background: var(--accent-gradient); border:none; max-width:800px; margin:0 auto;">
+          <h2 style="font-size: 2rem; font-weight: 800; color: white; margin-bottom: 16px;">Sẵn sàng dự đoán giá xe?
+          </h2>
+          <p
+            style="color: rgba(255,255,255,0.85); font-size: 1.1rem; margin-bottom: 32px; max-width: 500px; margin-left:auto; margin-right:auto;">
+            Chỉ cần vài thao tác đơn giản, bạn sẽ biết được giá trị thực sự của chiếc xe mình quan tâm.
+          </p>
+          <a href="du-doan.html" class="btn"
+            style="background: white; color: var(--accent-primary); font-weight: 700; padding: 16px 40px; font-size: 1.05rem;">
+            🚀 Bắt đầu dự đoán
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script>
+    // Load stats from API
+    async function loadStats() {
+      const stats = await fetchAPI('/stats');
+      if (stats) {
+        animateValue('statBrands', 0, stats.total_brands, 1500);
+        animateValue('statModels', 0, stats.total_models, 1500);
+        animateValue('statAccuracy', 0, Math.round(stats.model_accuracy || 87), 1500, '%');
+        animateValue('statRecords', 0, stats.total_records, 1500, '+');
+      } else {
+        // Fallback static values
+        document.getElementById('statBrands').textContent = '32';
+        document.getElementById('statModels').textContent = '8000+';
+        document.getElementById('statAccuracy').textContent = '92%';
+        document.getElementById('statRecords').textContent = '8128';
+      }
+    }
+
+    function animateValue(id, start, end, duration, suffix = '') {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const range = end - start;
+      const startTime = performance.now();
+      function update(timestamp) {
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(start + range * eased) + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    loadStats();
+  </script>
+</body>
+
+</html>
