@@ -125,6 +125,9 @@ def predict():
     
     data = request.json
     
+    if predictor is None:
+        return jsonify({'error': 'Predictor not initialized'}), 500
+        
     result = predictor.predict(
         name=data.get('name', ''),
         year=data.get('year', 2020),
@@ -138,8 +141,8 @@ def predict():
         seats=data.get('seats', 5),
     )
     
-    if result.get('error'):
-        return jsonify(result), 500
+    if result is None or result.get('error'):
+        return jsonify(result if result else {'error': 'Prediction failed'}), 500
     
     # Price Adjustment Logic based on new fields
     condition = data.get('condition', '')
@@ -233,7 +236,7 @@ def api_models(brand):
 
 @app.route('/api/fuel-types', methods=['GET'])
 def api_fuel_types():
-    if MODEL_LOADED:
+    if predictor and hasattr(predictor, 'get_fuel_types'):
         return jsonify({'fuel_types': predictor.get_fuel_types()})
     return jsonify({'fuel_types': ['Petrol', 'Diesel', 'CNG', 'LPG']})
 
@@ -259,10 +262,10 @@ def api_stats():
     else:
         result = _csv_stats(df)
     
-    if MODEL_LOADED:
-        result['model_accuracy'] = predictor.metadata.get('r2_score', 0) * 100
-        result['model_mae'] = predictor.metadata.get('mae', 0) * INR_TO_VND
-        result['total_models'] = predictor.metadata.get('n_samples', 0)
+    if predictor and hasattr(predictor, 'metadata') and predictor.metadata:
+        result['model_accuracy'] = float(predictor.metadata.get('r2_score', 0)) * 100
+        result['model_mae'] = float(predictor.metadata.get('mae', 0)) * INR_TO_VND
+        result['total_models'] = int(predictor.metadata.get('n_samples', 0))
     
     return jsonify(result)
 
@@ -270,11 +273,11 @@ def _csv_stats(df):
     if df.empty:
         return {'total_records': 0, 'total_brands': 0, 'avg_price': 0, 'min_price': 0, 'max_price': 0}
     return {
-        'total_records': len(df),
-        'total_brands': df['brand'].nunique(),
-        'avg_price': round(float(df['selling_price'].mean()) * INR_TO_VND, 0),
+        'total_records': int(len(df)),
+        'total_brands': int(df['brand'].nunique()),
+        'avg_price': int(round(float(df['selling_price'].mean()) * INR_TO_VND)),
         'min_price': float(df['selling_price'].min()) * INR_TO_VND,
-        'max_price': float(df_csv['selling_price'].max()) * INR_TO_VND,
+        'max_price': float(df['selling_price'].max()) * INR_TO_VND,
         'data_source': 'CSV',
     }
 
@@ -383,17 +386,20 @@ def verify_otp():
     if email not in OTP_STORE:
         return jsonify({'error': 'Chưa yêu cầu gửi mã OTP cho email này'}), 400
         
-    stored_data = OTP_STORE[email]
-    
-    if datetime.now() > stored_data['expires_at']:
-        del OTP_STORE[email]
+    stored_data = OTP_STORE.get(email)
+    if not stored_data:
+        return jsonify({'error': 'Phiên xác thực không hợp lệ'}), 400
+        
+    expires_at = stored_data.get('expires_at')
+    if isinstance(expires_at, datetime) and datetime.now() > expires_at:
+        OTP_STORE.pop(email, None)
         return jsonify({'error': 'Mã OTP đã hết hạn (quá 5 phút)'}), 400
         
-    if str(otp) != stored_data['otp']:
+    if str(otp) != str(stored_data.get('otp', '')):
         return jsonify({'error': 'Mã OTP không đúng'}), 400
         
     # Mark as verified
-    OTP_STORE[email]['verified'] = True
+    stored_data['verified'] = True
     
     return jsonify({'status': 'Xác thực OTP thành công'})
 
@@ -419,8 +425,9 @@ def reset_password():
     if not stored_data.get('verified'):
         return jsonify({'error': 'Bạn chưa xác thực mã OTP thành công'}), 403
         
-    if datetime.now() > stored_data['expires_at']:
-        del OTP_STORE[email]
+    expires_at = stored_data.get('expires_at')
+    if isinstance(expires_at, datetime) and datetime.now() > expires_at:
+        OTP_STORE.pop(email, None)
         return jsonify({'error': 'Phiên đổi mật khẩu đã hết hạn'}), 400
         
     # Update password in database
@@ -430,7 +437,7 @@ def reset_password():
         return jsonify(result), 500
         
     # Delete OTP after successful reset
-    del OTP_STORE[email]
+    OTP_STORE.pop(email, None)
     
     return jsonify({'status': 'Mật khẩu đã được thay đổi thành công'})
 

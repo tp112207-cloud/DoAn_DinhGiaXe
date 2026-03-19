@@ -109,14 +109,14 @@ def authenticate_user(email, password):
         return {'id': row[0], 'name': row[1], 'email': row[2]}
     return {'error': 'Invalid email or password'}
 
-def save_prediction(car_name, year, km_driven, fuel, transmission, owner, predicted_price, confidence, user_id=None):
-    """Save prediction to database, associated with a user if logged in"""
+def save_prediction(car_name, year, km_driven, fuel, transmission, owner, predicted_price, confidence, user_id=None, car_id=None):
+    """Save prediction to database, associated with a user and a car if available"""
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO Predictions (car_name, year, km_driven, fuel, transmission, owner, predicted_price, confidence, user_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, car_name, year, km_driven, fuel, transmission, owner, predicted_price, confidence, user_id)
+        INSERT INTO Predictions (car_name, year, km_driven, fuel, transmission, owner, predicted_price, confidence, user_id, car_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, car_name, year, km_driven, fuel, transmission, owner, predicted_price, confidence, user_id, car_id)
     conn.commit()
     conn.close()
 
