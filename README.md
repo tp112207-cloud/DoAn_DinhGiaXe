@@ -50,6 +50,19 @@ Mô hình được huấn luyện dựa trên tập dữ liệu thị trường 
 
 ---
 
+## 📂 Tải Dữ Liệu & Model (Quan trọng)
+
+Do một số file dữ liệu và Model AI có dung lượng lớn không thể đẩy trực tiếp lên GitHub, quý thầy/cô vui lòng tải bổ sung các file cần thiết từ Google Drive theo đường dẫn dưới đây:
+
+👉 **[Link Tải Dữ Liệu & Model (Google Drive)](https://drive.google.com/drive/folders/1PWORDBUVwevrJs9JYlhpedKBEoupsIfrtHZtVJhagNv8t5fQ7sJQdD1f_kmpHeImSake1Kbq?hl=vi)**
+
+**Các file cần tải và vị trí đặt:**
+1.  **Thư mục `backend/data/`**: Tải file `cardekho.csv` (Dataset huấn luyện).
+2.  **Thư mục `backend/model/`**: Tải file `car_price_model.pkl` (Model đã huấn luyện sẵn).
+3.  **Thư mục `backend/`**: Tải file `.env` (Nếu có, để cấu hình API Key và SMTP).
+
+---
+
 ## 🚀 Hướng Dẫn Cài Đặt & Khởi Chạy
 
 ### **1. Yêu cầu hệ thống**
