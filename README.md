@@ -7,120 +7,83 @@ sdk: static
 pinned: false
 ---
 
-# 🚗 AutoVision.AI: Hệ Thống Dự Đoán Giá Xe Ô Tô Thông Minh
+# 🚗 AutoVision.AI - Hệ Thống Định Giá Xe Thông Minh (AI Smart Valuation)
 
-**AutoVision.AI** là một ứng dụng web tích hợp trí tuệ nhân tạo (Machine Learning) nhằm hỗ trợ người dùng định giá xe ô tô đã qua sử dụng tại thị trường Việt Nam một cách chính xác và nhanh chóng.
-
----
-
-## 🌟 Tính Năng Cốt Lõi
-
-1. **Dự đoán giá xe nhanh**: Sử dụng mô hình Machine Learning bậc cao để ước tính giá trị xe dựa trên nhiều thông số kỹ thuật.
-2. **Phân tích thị trường**: Hệ thống biểu đồ trực quan về xu hướng giá xe theo năm, dòng xe và loại nhiên liệu.
-3. **Trợ lý ảo AI (Gemini)**: Tích hợp Chatbot thông minh hỗ trợ giải đáp các thắc mắc về thị trường xe và cách sử dụng hệ thống.
-4. **Quản lý lịch sử**: Lưu trữ và quản lý các kết quả dự đoán cá nhân (yêu cầu đăng nhập).
-5. **Giao diện hiện đại**: Thiết kế Premium, hỗ trợ đa thiết bị và trải nghiệm người dùng tối ưu.
+**AutoVision.AI** là nền tảng số hóa ứng dụng trí tuệ nhân tạo (Mô hình Gradient Boosting) nhằm hỗ trợ người dùng và các chuyên gia định giá xe ô tô đã qua sử dụng một cách chính xác, minh bạch và nhanh chóng tại thị trường Việt Nam. Dự án được thiết kế với giao diện Dashboard hiện đại, mang lại trải nghiệm tối ưu cho cả cá nhân và các đại lý kinh doanh xe.
 
 ---
 
-## 🛠️ Cấu Trúc Công Nghệ (Tech Stack)
+## 🌟 TÍNH NĂNG NỔI BẬT (Key Features)
 
-### **Backend (Hệ thống máy chủ)**
-- **Ngôn ngữ**: Python 3.x
-- **Framework**: Flask (Web API)
-- **Cơ sở dữ liệu**: SQL Server (Lưu trữ người dùng/lịch sử) & CSV (Dữ liệu thị trường)
-- **AI/ML**: Scikit-Learn (Gradient Boosting Regressor), Pandas, NumPy
+### 1. 🤖 Lõi AI Dự Đoán Siêu Tốc (Smart Predictor)
+- Sử dụng thuật toán **Gradient Boosting Regressor** từ thư viện Scikit-learn đã được tinh chỉnh (Fine-tuning) kỹ lưỡng.
+- Tốc độ xử lý siêu nhanh: Trả kết quả dự đoán cùng khoảng tin cậy (Confidence Interval) chỉ trong **< 1 giây**.
+- Độ chính xác (**$R^2$ Score**) đạt trên **87.4%** từ tập dữ liệu thực tế hơn 300+ mẫu xe phổ biến.
 
-### **Frontend (Giao diện người dùng)**
-- **Cơ bản**: HTML5, Vanilla CSS3 (Custom Design System), Modern JavaScript (ES6+)
-- **Đồ họa**: Chart.js (Biểu đồ phân tích)
-- **Animation**: AOS, GSAP (Micro-interactions)
+### 2. 📊 Bảng Điều Khiển Phân Tích (Market Dashboard)
+- Không chỉ đưa ra con số, hệ thống còn cung cấp cái nhìn toàn cảnh về thị trường thông qua các biểu đồ (Charts) trực quan.
+- Tự động thống kê xu hướng giá theo: **Năm sản xuất, Loại nhiên liệu, Kiểu truyền động** và **Thương hiệu phổ biến**.
+- Giúp người dùng đưa ra quyết định mua/bán dựa trên dữ liệu (Data-driven decisions) thay vì cảm tính.
 
-### **AI Integration**
-- **LLM**: Google Gemini AI (Cung cấp giải pháp hội thoại thông minh)
+### 3. 💬 Trợ Lý Ảo AutoVision (Gemini Inside)
+- Tích hợp mô hình ngôn ngữ lớn **Google Gemini AI** (Smart Chatbot).
+- Hỗ trợ giải đáp thắc mắc về kỹ thuật xe, tư vấn lựa chọn dòng xe phù hợp và hướng dẫn sử dụng hệ thống một cách thông minh.
+- Phản hồi bằng tiếng Việt tự nhiên, chuyên sâu về lĩnh vực ô tô.
 
----
+### 4. 🗄️ Quản Lý Lịch Sử & Tài Khoản (Smart CRM)
+- Tích hợp hệ thống quản lý người dùng (Login/Register) thông qua **SQL Server**.
+- Mọi lịch sử định giá đều được lưu lại chi tiết theo từng tài khoản cá nhân.
+- Tính năng **Báo cáo lịch sử**: Dễ dàng tra cứu lại các phiên định giá cũ để so sánh sự biến động của giá trị xe theo thời gian.
 
-## 📊 Mô Hình Machine Learning
+### 5. 🏥 Hệ Thống Tra Cứu & Xác Thực OTP
+- Bảo mật thông tin người dùng bằng hệ thống xác thực OTP qua email khi đổi mật khẩu (SMTP Server).
+- Đảm bảo an toàn dữ liệu cá nhân cho mọi giao dịch và thông tin trên nền tảng.
 
-Mô hình được huấn luyện dựa trên tập dữ liệu thị trường thực tế với hơn 300+ bản ghi chi tiết.
-- **Thuật toán**: Gradient Boosting Regressor.
-- **Độ chính xác (Accuracy)**: $R^2 \approx 87.4\%$.
-- **Các đặc trưng đầu vào**: Thương hiệu, Năm sản xuất, Số Km đã đi, Loại nhiên liệu, Kiểu truyền động, Tình trạng xe, Nguồn gốc xuất xứ.
-
----
-
-## 📂 Tải Dữ Liệu & Model (Quan trọng)
-
-Do một số file dữ liệu và Model AI có dung lượng lớn không thể đẩy trực tiếp lên GitHub, quý thầy/cô vui lòng tải bổ sung các file cần thiết từ Google Drive theo đường dẫn dưới đây:
-
-👉 **[Link Tải Dữ Liệu & Model (Google Drive)](https://drive.google.com/drive/folders/1PWORDBUVwevrJs9JYlhpedKBEoupsIfrtHZtVJhagNv8t5fQ7sJQdD1f_kmpHeImSake1Kbq?hl=vi)**
-
-**Các file cần tải và vị trí đặt:**
-1.  **Thư mục `backend/data/`**: Tải file `cardekho.csv` (Dataset huấn luyện).
-2.  **Thư mục `backend/model/`**: Tải file `car_price_model.pkl` (Model đã huấn luyện sẵn).
-3.  **Thư mục `backend/`**: Tải file `.env` (Nếu có, để cấu hình API Key và SMTP).
+### 6. 🌍 Giao Diện Tùy Biến Chuyên Sâu (UX/UI Premium)
+- Cấu trúc **SPA (Single Page Application)** chuyển tab mượt mà, không giật lag.
+- Hỗ trợ **Dark/Light Mode** bảo vệ mắt cho người dùng khi làm việc ban đêm.
+- Tích hợp các hiệu ứng Micro-animations (AOS, GSAP) tạo cảm giác cao cấp và chuyên nghiệp.
 
 ---
 
-## 🚀 Hướng Dẫn Cài Đặt & Khởi Chạy
+## 🛠️ CÔNG NGHỆ SỬ DỤNG (Tech Stack)
 
-### **1. Yêu cầu hệ thống**
-- Python 3.8+
-- SQL Server (Tùy chọn, hệ thống tự động fallback sang CSV nếu không có)
-
-### **2. Cài đặt môi trường**
-Mở terminal và thực hiện các lệnh sau:
-```bash
-# Di chuyển vào thư mục backend
-cd backend
-
-# Cài đặt các thư viện cần thiết
-pip install -r requirements.txt
-
-# Cấu hình môi trường (Tạo file .env)
-# Điền GEMINI_API_KEY, EMAIL_USER, EMAIL_PASS
-```
-
-### **3. Khởi chạy hệ thống**
-Bạn có thể dùng Launcher tích hợp sẵn tại thư mục gốc:
-```bash
-python run.py
-```
-Hệ thống sẽ tự động thực hiện:
-- Kiểm tra & Cài đặt thư viện còn thiếu.
-- Khởi tạo Database.
-- Huấn luyện Model AI (nếu chưa có).
-- Khởi chạy Web Server tại cổng `7860`.
+| Thành phần | Công nghệ tiêu biểu |
+| :--- | :--- |
+| **Trí tuệ nhân tạo (AI/ML)** | Scikit-learn, Pandas, NumPy, Matplotlib |
+| **Backend (Máy chủ)** | Python, Flask, Flask-CORS, SMTP |
+| **Cơ sở dữ liệu** | Microsoft SQL Server (Hoặc CSV Fallback) |
+| **Bảo mật** | Password Hashing (SHA256), OTP Verification, .env secrets |
+| **Frontend (Giao diện)** | HTML5, CSS3, Vanilla JS (ES6+), Chart.js, AOS Library |
+| **Hạ tầng (Deployment)** | Cloudflare Tunnel (Fixed Custom Domain) |
 
 ---
 
-## 🌐 Truy Cập Trực Tuyến
+## 🚀 HƯỚNG DẪN CÀI ĐẶT & SỬ DỤNG
 
-Ứng dụng hiện đang được public để demo tại địa chỉ:
-👉 **[https://th.xurtxinh.id.vn](https://th.xurtxinh.id.vn)**
+### ⚠️ LƯU Ý QUAN TRỌNG VỀ DỮ LIỆU & MÔ HÌNH (QUAN TRỌNG)
+> Do kích thước Model AI và Dataset thực tế lớn, Quý thầy vui lòng tải bổ sung các file cần thiết tại link Google Drive dưới đây:
+> 
+> 👉 **[(Link Google Drive)](https://drive.google.com/drive/folders/1PWORDBUVwevrJs9JYlhpedKBEoupsIfrtHZtVJhagNv8t5fQ7sJQdD1f_kmpHeImSake1Kbq?hl=vi)**
 
-*(Lưu ý: Hệ thống tunnel được cài đặt tự động dưới dạng nền (Service) thông qua Cloudflare Tunnel, đảm bảo kết nối ổn định mà không cần mở port mạng).*
-
----
-
-## 📁 Tổ Chức Thư Mục
-
-```bash
-DoAn_DinhGiaXe/
-├── backend/            # Mã nguồn máy chủ và xử lý AI
-│   ├── app.py          # Flask Main Entry
-│   ├── database.py     # Xử lý SQL Server
-│   ├── model/          # Định nghĩa và lưu trữ Model ML
-│   └── data/           # Dataset huấn luyện
-├── frontend/           # Toàn bộ giao diện người dùng
-│   ├── index.html      # Trang chủ (Dashboard)
-│   ├── du-doan.html    # Giao diện dự đoán giá
-│   ├── css/            # UI/UX Styles
-│   └── js/             # Logic tương tác phía client
-├── run.py              # Launcher tự động (Mọi thứ trong một)
-└── README.md           # Tài liệu kỹ thuật
-```
+**Sau khi tải về, vui lòng đặt vào đúng vị trí:**
+1. Chép file `cardekho.csv` (Dataset) vào thư mục **`backend/data/`**
+2. Chép file `car_price_model.pkl` (Model AI) vào thư mục **`backend/model/`**
+3. Tạo file **`.env`** tại thư mục **`backend/`** và điền `GEMINI_API_KEY` (nếu cần dùng chatbot).
 
 ---
-**AutoVision.AI** - *Đồ án định giá xe thông minh - 2026*
+
+### **Các bước khởi chạy:**
+1. **Khởi động Backend (Não bộ AI):**
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   python app.py
+   ```
+2. **Khởi chạy Launcher (All-in-one):**
+   Hoặc đơn giản nhất, bạn chỉ cần chạy file **`run.py`** ở thư mục gốc để hệ thống tự động thiết lập và chạy Web Server.
+
+👉 **Link Demo Trực Tuyến:** [https://th.xurtxinh.id.vn](https://th.xurtxinh.id.vn)
+
+
+**AutoVision.AI** - *Kiến tạo tương lai định giá xe bằng dữ liệu & AI.*
