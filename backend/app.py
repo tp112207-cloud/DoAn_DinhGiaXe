@@ -41,9 +41,6 @@ if EMAIL_USER and EMAIL_PASS:
 else:
     print("Warning: EMAIL_USER or EMAIL_PASS not found in .env. OTP will only be logged to console.")
 
-# Restart Configuration
-RESTART_TOKEN = os.getenv('RESTART_TOKEN')
-
 # Tỷ giá chuyển đổi INR sang VND
 INR_TO_VND = 300
 
@@ -110,7 +107,6 @@ def serve_static(path):
 
 
 # ===== API ENDPOINTS =====
-@app.route('/health', methods=['GET'])
 @app.route('/api/health', methods=['GET'])
 def health():
     return jsonify({
@@ -119,27 +115,6 @@ def health():
         'sql_connected': USE_SQL,
         'data_source': 'SQL Server' if USE_SQL else 'CSV'
     })
-
-@app.route('/api/restart', methods=['POST'])
-def restart_service():
-    """Restart the service (requires token)"""
-    auth_header = request.headers.get('Authorization')
-    if not RESTART_TOKEN or auth_header != f"Bearer {RESTART_TOKEN}":
-        return jsonify({'error': 'Unauthorized'}), 401
-    
-    print("Restart request received. Service shutting down in 2 seconds...")
-    
-    # Thread to allow response to be sent before exiting
-    import threading
-    import time
-    def shutdown():
-        time.sleep(2)
-        print("Exiting now...")
-        os._exit(0) # PM2 will restart it
-        
-    threading.Thread(target=shutdown).start()
-    
-    return jsonify({'status': 'Restarting...'})
 
 
 @app.route('/api/predict', methods=['POST'])
