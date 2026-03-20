@@ -30,11 +30,10 @@ python app.py
 Server sẽ chạy tại: `http://localhost:7860`
 
 ### 3. Public ra Internet (Cloudflare Tunnel)
-Để demo cho người khác xem mà không cần cài đặt, bạn có thể dùng Cloudflare Tunnel:
-1. Cài đặt `cloudflared`: `winget install Cloudflare.cloudflared`
-2. Chạy ứng dụng: `python run.py`
-3. Chạy tunnel: nháy đúp file `start_tunnel.bat`
-4. Copy link `.trycloudflare.com` gửi cho bạn bè.
+Ứng dụng đang được public tại tên miền riêng:
+👉 **[th.xurtxinh.id.vn](https://th.xurtxinh.id.vn)**
+
+*(Lưu ý: Bạn chỉ cần chạy `python run.py` là web sẽ tự động online qua tunnel đã cài đặt sẵn dạng Service trên máy).*
 
 ### 2. Frontend
 
