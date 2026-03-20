@@ -84,6 +84,6 @@ pinned: false
    Hoặc đơn giản nhất, bạn chỉ cần chạy file **`run.py`** ở thư mục gốc để hệ thống tự động thiết lập và chạy Web Server.
 
 👉 **Link Demo Trực Tuyến:** [https://th.xurtxinh.id.vn](https://th.xurtxinh.id.vn)
-
+Do hệ thống demo hiện được triển khai trên nền tảng máy chủ miễn phí, nên trong một số thời điểm có thể xảy ra tình trạng không truy cập được hoặc phản hồi chậm. Kính mong Thầy thông cảm và thử lại sau ạ.
 
 **AutoVision.AI** - *Kiến tạo tương lai định giá xe bằng dữ liệu & AI.*
